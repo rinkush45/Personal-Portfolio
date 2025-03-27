@@ -6,12 +6,12 @@ import { useIsMobile } from '@/hooks/use-mobile';
 
 // Tech icons
 const techIcons = [
-  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg', delay: 300, top: '20%', left: '80%', size: 'w-10 h-10' },
-  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg', delay: 500, top: '70%', left: '85%', size: 'w-8 h-8' },
-  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg', delay: 700, top: '30%', left: '10%', size: 'w-12 h-12' },
-  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg', delay: 900, top: '65%', left: '15%', size: 'w-9 h-9' },
-  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', delay: 1100, top: '15%', left: '40%', size: 'w-8 h-8' },
-  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg', delay: 1300, top: '75%', left: '40%', size: 'w-10 h-10' },
+  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg', delay: 300, top: '15%', left: '80%', size: 'w-10 h-10' },
+  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg', delay: 500, top: '75%', left: '85%', size: 'w-8 h-8' },
+  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg', delay: 700, top: '25%', left: '10%', size: 'w-12 h-12' },
+  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg', delay: 900, top: '70%', left: '15%', size: 'w-9 h-9' },
+  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', delay: 1100, top: '10%', left: '40%', size: 'w-8 h-8' },
+  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg', delay: 1300, top: '80%', left: '40%', size: 'w-10 h-10' },
 ];
 
 export default function Hero() {
@@ -39,6 +39,11 @@ export default function Hero() {
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-radial from-transparent to-background/80 z-0" />
       
+      {/* Animated grid background */}
+      <div className="absolute inset-0 z-0">
+        <div className="h-full w-full bg-grid-pattern opacity-30" />
+      </div>
+      
       {/* Floating tech icons - hide on mobile for better performance */}
       {!isMobile && techIcons.map((icon, index) => (
         <div
@@ -63,7 +68,7 @@ export default function Hero() {
         </div>
       ))}
       
-      <div className="content-container z-10 px-4 sm:px-6 md:px-8 text-center">
+      <div className="content-container z-10 px-4 sm:px-6 md:px-8 text-center max-w-4xl">
         <div className="mb-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/50 backdrop-blur-sm text-sm border border-border/50">
           <div className="w-2 h-2 rounded-full bg-neon-pink animate-pulse-glow"></div>
           <span>DevOps Engineer</span>
@@ -81,10 +86,10 @@ export default function Hero() {
           <span className="neon-glow-text-orange font-semibold"> CI/CD</span>
         </h2>
         
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
           <a 
             href="#contact" 
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-neon-violet to-neon-pink text-white font-medium hover:opacity-90 transition-all duration-300 hover:translate-y-[-2px] shadow-lg shadow-neon-pink/20"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-neon-violet to-neon-pink text-white font-medium hover:opacity-90 transition-all duration-300 hover:translate-y-[-2px] shadow-lg shadow-neon-pink/20 w-full sm:w-auto justify-center"
           >
             Get in Touch
           </a>
@@ -92,7 +97,7 @@ export default function Hero() {
           <a 
             href="#" 
             download 
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-neon-orange/50 text-neon-orange font-medium hover:bg-neon-orange/10 transition-all duration-300 hover:translate-y-[-2px] shadow-neon-orange"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-neon-orange/50 text-neon-orange font-medium hover:bg-neon-orange/10 transition-all duration-300 hover:translate-y-[-2px] shadow-neon-orange w-full sm:w-auto justify-center"
           >
             <Download className="w-4 h-4" /> 
             Download Resume

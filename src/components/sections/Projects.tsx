@@ -1,11 +1,23 @@
 
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import ProjectCard from '../ui/ProjectCard';
+import { cn } from '@/lib/utils';
+import { ExternalLink, Github } from 'lucide-react';
+
+interface Project {
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+  githubUrl: string;
+  liveUrl: string;
+  color: 'violet' | 'pink' | 'orange' | 'cyan';
+  delay: number;
+}
 
 export default function Projects() {
   const sectionRef = useScrollReveal();
   
-  const projects = [
+  const projects: Project[] = [
     {
       title: "Civom AI",
       description: "Deployed and managed infrastructure for an AI-powered platform using AWS, Kubernetes, and Terraform. Implemented CI/CD pipelines for automated testing and deployment, resulting in a 60% reduction in deployment time and improved reliability.",
@@ -55,25 +67,132 @@ export default function Projects() {
           <h2 className="section-title">My Projects</h2>
         </div>
         
-        <div 
-          ref={sectionRef} 
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center"
-        >
+        <div ref={sectionRef} className="flex flex-col items-center w-full max-w-3xl mx-auto">
           {projects.map((project, index) => (
-            <ProjectCard
+            <BlockchainProjectCard 
               key={index}
-              title={project.title}
-              description={project.description}
-              image={project.image}
-              tags={project.tags}
-              githubUrl={project.githubUrl}
-              liveUrl={project.liveUrl}
-              color={project.color as 'violet' | 'pink' | 'orange' | 'cyan'}
-              delay={project.delay}
+              project={project} 
+              index={index}
+              isLast={index === projects.length - 1}
             />
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+interface BlockchainProjectCardProps {
+  project: Project;
+  index: number;
+  isLast: boolean;
+}
+
+function BlockchainProjectCard({ project, index, isLast }: BlockchainProjectCardProps) {
+  const colorVariants = {
+    violet: "border-neon-violet/50 shadow-neon-violet text-neon-violet",
+    pink: "border-neon-pink/50 shadow-neon-pink text-neon-pink",
+    orange: "border-neon-orange/50 shadow-neon-orange text-neon-orange",
+    cyan: "border-neon-cyan/50 shadow-neon-cyan text-neon-cyan"
+  };
+  
+  const bgVariants = {
+    violet: "bg-neon-violet/10",
+    pink: "bg-neon-pink/10",
+    orange: "bg-neon-orange/10",
+    cyan: "bg-neon-cyan/10"
+  };
+  
+  return (
+    <div className="w-full">
+      <div 
+        className={cn(
+          "glass-card glass-card-dark rounded-lg overflow-hidden border",
+          "transition-all duration-500 hover:scale-[1.02]",
+          "group relative w-full",
+          colorVariants[project.color]
+        )}
+        style={{ 
+          animationDelay: `${project.delay * 200}ms`,
+        }}
+      >
+        {/* Blockchain node indicator */}
+        <div className={cn(
+          "absolute top-0 left-6 w-6 h-6 rounded-full -mt-3",
+          "border-2 z-10",
+          colorVariants[project.color], 
+          bgVariants[project.color]
+        )}>
+          <div className="absolute inset-0 rounded-full animate-pulse-glow" />
+        </div>
+        
+        {/* Project content */}
+        <div className="p-6 md:p-8">
+          <h3 className={cn(
+            "text-xl md:text-2xl font-bold mb-3",
+            `text-neon-${project.color}`
+          )}>
+            {project.title}
+          </h3>
+          
+          <p className="text-muted-foreground mb-4">
+            {project.description}
+          </p>
+          
+          <div className="flex flex-wrap gap-2 mb-6">
+            {project.tags.map((tag, tagIndex) => (
+              <span 
+                key={tagIndex} 
+                className={cn(
+                  "text-xs px-2.5 py-1 rounded-full",
+                  bgVariants[project.color],
+                  "border",
+                  colorVariants[project.color]
+                )}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          
+          <div className="flex gap-4">
+            <a 
+              href={project.githubUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className={cn(
+                "inline-flex items-center gap-1.5 text-sm",
+                "hover:opacity-80 transition-opacity"
+              )}
+            >
+              <Github size={16} />
+              View Code
+            </a>
+            <a 
+              href={project.liveUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className={cn(
+                "inline-flex items-center gap-1.5 text-sm",
+                "hover:opacity-80 transition-opacity"
+              )}
+            >
+              <ExternalLink size={16} />
+              Live Demo
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      {/* Connector line to next block */}
+      {!isLast && (
+        <div className="flex justify-center">
+          <div className={cn(
+            "h-16 w-0.5",
+            `bg-neon-${projects[index + 1].color}/30`
+          )} />
+        </div>
+      )}
+    </div>
   );
 }
