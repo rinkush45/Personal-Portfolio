@@ -41,19 +41,19 @@ export default function Certifications() {
   ];
 
   return (
-    <section id="certifications" className="py-20 relative overflow-hidden bg-secondary/20">
+    <section id="certifications" className="py-20 relative overflow-hidden bg-secondary/20 w-full flex items-center justify-center">
       <div 
         className="absolute inset-0 bg-grid-pattern opacity-30 z-0"
       />
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="content-container relative z-10">
         <div className="text-center mb-16">
           <h2 className="section-title">Certifications</h2>
         </div>
         
         <div 
           ref={sectionRef} 
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center"
         >
           {certifications.map((cert, index) => (
             <CertificationCard

@@ -48,7 +48,7 @@ export default function Navbar() {
   return (
     <header 
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full',
         isScrolled 
           ? 'bg-background/80 backdrop-blur-lg py-3 shadow-md' 
           : 'bg-transparent py-5'
@@ -120,7 +120,7 @@ export default function Navbar() {
                   <a
                     href={item.href}
                     className={cn(
-                      'text-lg font-medium transition-all duration-300 block py-2',
+                      'text-lg font-medium transition-all duration-300 block py-2 text-center',
                       'border-b border-border',
                       activeSection === item.href.substring(1)
                         ? 'text-foreground'

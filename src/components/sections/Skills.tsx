@@ -57,18 +57,18 @@ export default function Skills() {
   return (
     <section 
       id="skills" 
-      className="py-20 relative overflow-hidden bg-secondary/20"
+      className="py-20 relative overflow-hidden bg-secondary/20 w-full flex items-center justify-center"
     >
       <div 
         className="absolute inset-0 bg-grid-pattern opacity-30 z-0"
       />
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="content-container relative z-10">
         <div className="text-center mb-16">
           <h2 className="section-title">Technical Skills</h2>
         </div>
         
-        <div ref={sectionRef} className="space-y-12">
+        <div ref={sectionRef} className="space-y-12 w-full">
           {skillCategories.map((category, categoryIndex) => (
             <div key={categoryIndex} className="mb-10">
               <h3 className="text-xl font-semibold mb-6 inline-block relative">
@@ -76,7 +76,7 @@ export default function Skills() {
                 <span className="absolute bottom-[-5px] left-0 w-full h-0.5 rounded-full bg-gradient-to-r from-neon-violet to-neon-pink"></span>
               </h3>
               
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 justify-center">
                 {category.skills.map((skill, skillIndex) => (
                   <AnimatedIcon
                     key={skillIndex}

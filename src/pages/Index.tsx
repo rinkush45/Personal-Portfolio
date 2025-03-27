@@ -33,10 +33,10 @@ const Index = () => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
-        className="min-h-screen flex flex-col"
+        className="min-h-screen flex flex-col w-full max-w-full overflow-x-hidden"
       >
         <Navbar />
-        <main className="flex-grow">
+        <main className="flex-grow flex flex-col items-center justify-center w-full">
           <Hero />
           <About />
           <Skills />

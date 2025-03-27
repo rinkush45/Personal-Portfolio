@@ -49,15 +49,15 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="py-20 relative overflow-hidden">
-      <div className="container mx-auto px-4">
+    <section id="projects" className="py-20 relative overflow-hidden w-full flex items-center justify-center">
+      <div className="content-container">
         <div className="text-center mb-16">
           <h2 className="section-title">My Projects</h2>
         </div>
         
         <div 
           ref={sectionRef} 
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center"
         >
           {projects.map((project, index) => (
             <ProjectCard

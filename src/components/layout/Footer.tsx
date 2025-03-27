@@ -30,10 +30,10 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="py-10 bg-secondary/30 backdrop-blur-sm border-t border-border">
-      <div className="container mx-auto px-4">
+    <footer className="py-10 bg-secondary/30 backdrop-blur-sm border-t border-border w-full">
+      <div className="content-container">
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-6 md:mb-0">
+          <div className="mb-6 md:mb-0 text-center md:text-left">
             <p className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-neon-violet to-neon-pink">
               Rinku Sharma
             </p>
@@ -57,7 +57,7 @@ export default function Footer() {
                 </a>
               ))}
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground text-center md:text-right">
               © {new Date().getFullYear()} Rinku Sharma | All Rights Reserved
             </p>
           </div>

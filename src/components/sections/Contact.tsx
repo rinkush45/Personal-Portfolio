@@ -77,8 +77,8 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-20 relative overflow-hidden">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="py-20 relative overflow-hidden w-full flex items-center justify-center">
+      <div className="content-container">
         <div className="text-center mb-16">
           <h2 className="section-title">Get In Touch</h2>
         </div>

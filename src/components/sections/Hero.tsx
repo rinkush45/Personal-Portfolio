@@ -34,7 +34,7 @@ export default function Hero() {
   return (
     <section 
       id="home" 
-      className="relative min-h-[90vh] flex items-center justify-center overflow-hidden grid-bg py-16 md:py-0"
+      className="relative min-h-[90vh] w-full flex items-center justify-center overflow-hidden grid-bg py-16 md:py-0"
     >
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-radial from-transparent to-background/80 z-0" />
@@ -63,7 +63,7 @@ export default function Hero() {
         </div>
       ))}
       
-      <div className="container mx-auto px-4 z-10 flex flex-col items-center text-center max-w-5xl">
+      <div className="content-container z-10 px-4 sm:px-6 md:px-8 text-center">
         <div className="mb-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/50 backdrop-blur-sm text-sm border border-border/50">
           <div className="w-2 h-2 rounded-full bg-neon-pink animate-pulse-glow"></div>
           <span>DevOps Engineer</span>
@@ -73,7 +73,7 @@ export default function Hero() {
           Rinku Sharma
         </h1>
         
-        <h2 className="text-xl md:text-2xl max-w-3xl mb-8 leading-relaxed text-foreground/80">
+        <h2 className="text-xl md:text-2xl max-w-3xl mx-auto mb-8 leading-relaxed text-foreground/80">
           Cloud & Automation Enthusiast with expertise in 
           <span className="neon-glow-text-violet font-semibold"> AWS</span>,
           <span className="neon-glow-text-cyan font-semibold"> Kubernetes</span>,
@@ -81,7 +81,7 @@ export default function Hero() {
           <span className="neon-glow-text-orange font-semibold"> CI/CD</span>
         </h2>
         
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a 
             href="#contact" 
             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-neon-violet to-neon-pink text-white font-medium hover:opacity-90 transition-all duration-300 hover:translate-y-[-2px] shadow-lg shadow-neon-pink/20"
