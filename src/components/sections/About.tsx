@@ -25,22 +25,22 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-20 relative overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+    <section id="about" className="py-16 md:py-20 relative overflow-hidden">
+      <div className="container mx-auto max-w-5xl">
+        <div className="text-center mb-12 md:mb-16">
           <h2 className="section-title">About Me</h2>
         </div>
         
-        <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          <div className="glass-card glass-card-dark rounded-lg p-8 border border-neon-violet/30 shadow-neon-violet col-span-1 md:col-span-2 opacity-0 animate-slide-up">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-neon-violet">
-                <User className="w-6 h-6" />
+        <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
+          <div className="glass-card glass-card-dark rounded-lg p-6 md:p-8 border border-neon-violet/30 shadow-neon-violet col-span-1 md:col-span-2 opacity-0 animate-slide-up">
+            <div className="flex items-center gap-3 mb-4 md:mb-6">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary flex items-center justify-center text-neon-violet">
+                <User className="w-5 h-5 md:w-6 md:h-6" />
               </div>
-              <h3 className="text-xl font-semibold">Who I Am</h3>
+              <h3 className="text-lg md:text-xl font-semibold">Who I Am</h3>
             </div>
             
-            <div className="space-y-4 text-muted-foreground">
+            <div className="space-y-3 md:space-y-4 text-muted-foreground">
               <p>
                 I'm Rinku Sharma, a passionate DevOps Engineer with expertise in cloud infrastructure, automation, and CI/CD pipelines. My journey in the tech world has been driven by a fascination with building efficient, scalable, and reliable systems.
               </p>
@@ -58,16 +58,16 @@ export default function About() {
               <div 
                 key={index}
                 className={cn(
-                  "glass-card glass-card-dark rounded-lg p-6 border border-neon-pink/30 shadow-neon-pink opacity-0",
+                  "glass-card glass-card-dark rounded-lg p-4 md:p-6 border border-neon-pink/30 shadow-neon-pink opacity-0",
                   "hover:translate-y-[-5px] transition-all duration-300"
                 )}
                 style={{ animationDelay: `${(index + 1) * 100}ms` }}
               >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-neon-pink">
+                <div className="flex items-center gap-3 mb-2 md:mb-3">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-secondary flex items-center justify-center text-neon-pink">
                     {card.icon}
                   </div>
-                  <h3 className="text-lg font-semibold">{card.title}</h3>
+                  <h3 className="text-base md:text-lg font-semibold">{card.title}</h3>
                 </div>
                 <p className="text-muted-foreground text-sm">{card.description}</p>
               </div>
@@ -75,10 +75,10 @@ export default function About() {
           </div>
         </div>
         
-        <div className="mt-8 flex justify-center">
+        <div className="mt-6 md:mt-8 flex justify-center">
           <a 
             href="#skills" 
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-secondary hover:bg-secondary/80 text-foreground transition-all duration-300"
+            className="inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 rounded-lg bg-secondary hover:bg-secondary/80 text-foreground transition-all duration-300"
           >
             Explore My Skills
           </a>

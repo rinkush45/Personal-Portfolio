@@ -2,6 +2,7 @@
 import { useEffect, useRef } from 'react';
 import { ArrowDown, Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 // Tech icons
 const techIcons = [
@@ -16,6 +17,7 @@ const techIcons = [
 export default function Hero() {
   // Refs for animated elements
   const techIconsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     // Animate tech icons into view with delays
@@ -32,13 +34,13 @@ export default function Hero() {
   return (
     <section 
       id="home" 
-      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden grid-bg"
+      className="relative min-h-[90vh] flex items-center justify-center overflow-hidden grid-bg py-16 md:py-0"
     >
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-radial from-transparent to-background/80 z-0" />
       
-      {/* Floating tech icons */}
-      {techIcons.map((icon, index) => (
+      {/* Floating tech icons - hide on mobile for better performance */}
+      {!isMobile && techIcons.map((icon, index) => (
         <div
           key={index}
           ref={el => techIconsRef.current[index] = el}
@@ -61,7 +63,7 @@ export default function Hero() {
         </div>
       ))}
       
-      <div className="container mx-auto px-4 z-10 flex flex-col items-center text-center">
+      <div className="container mx-auto px-4 z-10 flex flex-col items-center text-center max-w-5xl">
         <div className="mb-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/50 backdrop-blur-sm text-sm border border-border/50">
           <div className="w-2 h-2 rounded-full bg-neon-pink animate-pulse-glow"></div>
           <span>DevOps Engineer</span>
@@ -97,7 +99,7 @@ export default function Hero() {
           </a>
         </div>
         
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
           <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors duration-300">
             <ArrowDown className="w-6 h-6" />
           </a>
