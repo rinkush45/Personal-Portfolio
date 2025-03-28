@@ -10,7 +10,7 @@ interface Project {
   tags: string[];
   githubUrl: string;
   liveUrl: string;
-  color: 'violet' | 'pink' | 'orange' | 'cyan';
+  color: 'primary' | 'secondary' | 'accent' | 'highlight';
   delay: number;
 }
 
@@ -25,7 +25,7 @@ export default function Projects() {
       tags: ["AWS", "Kubernetes", "Terraform", "CI/CD", "Docker"],
       githubUrl: "#",
       liveUrl: "#",
-      color: "violet",
+      color: "primary",
       delay: 0
     },
     {
@@ -35,7 +35,7 @@ export default function Projects() {
       tags: ["AWS", "Auto-scaling", "Prometheus", "Grafana", "Backend"],
       githubUrl: "#",
       liveUrl: "#",
-      color: "pink",
+      color: "secondary",
       delay: 1
     },
     {
@@ -45,7 +45,7 @@ export default function Projects() {
       tags: ["Terraform", "AWS", "Microservices", "Docker", "CI/CD"],
       githubUrl: "#",
       liveUrl: "#",
-      color: "orange",
+      color: "accent",
       delay: 2
     },
     {
@@ -55,13 +55,13 @@ export default function Projects() {
       tags: ["AWS", "Cost Optimization", "Python", "Automation"],
       githubUrl: "#",
       liveUrl: "#",
-      color: "cyan",
+      color: "highlight",
       delay: 3
     }
   ];
 
   return (
-    <section id="projects" className="py-20 relative overflow-hidden w-full flex items-center justify-center">
+    <section id="projects" className="py-20 relative overflow-hidden w-full flex items-center justify-center bg-muted/20">
       <div className="content-container">
         <div className="text-center mb-16">
           <h2 className="section-title">My Projects</h2>
@@ -69,7 +69,7 @@ export default function Projects() {
         
         <div ref={sectionRef} className="flex flex-col items-center w-full max-w-3xl mx-auto">
           {projects.map((project, index) => (
-            <BlockchainProjectCard 
+            <ProjectCard 
               key={index}
               project={project} 
               index={index}
@@ -82,32 +82,36 @@ export default function Projects() {
   );
 }
 
-interface BlockchainProjectCardProps {
+interface ProjectCardProps {
   project: Project;
   index: number;
   isLast: boolean;
 }
 
-function BlockchainProjectCard({ project, index, isLast }: BlockchainProjectCardProps) {
+function ProjectCard({ project, index, isLast }: ProjectCardProps) {
   const colorVariants = {
-    violet: "border-neon-violet/50 shadow-neon-violet text-neon-violet",
-    pink: "border-neon-pink/50 shadow-neon-pink text-neon-pink",
-    orange: "border-neon-orange/50 shadow-neon-orange text-neon-orange",
-    cyan: "border-neon-cyan/50 shadow-neon-cyan text-neon-cyan"
+    primary: "border-primary/50 shadow-md text-primary",
+    secondary: "border-secondary/50 shadow-md text-secondary-foreground",
+    accent: "border-accent/50 shadow-md text-accent",
+    highlight: "border-teal-500/50 shadow-md text-teal-500"
   };
   
   const bgVariants = {
-    violet: "bg-neon-violet/10",
-    pink: "bg-neon-pink/10",
-    orange: "bg-neon-orange/10",
-    cyan: "bg-neon-cyan/10"
+    primary: "bg-primary/5",
+    secondary: "bg-secondary/5",
+    accent: "bg-accent/5",
+    highlight: "bg-teal-500/5"
   };
+  
+  const nextColor = project.color === 'primary' ? 'secondary' : 
+                    project.color === 'secondary' ? 'accent' : 
+                    project.color === 'accent' ? 'highlight' : 'primary';
   
   return (
     <div className="w-full">
       <div 
         className={cn(
-          "glass-card glass-card-dark rounded-lg overflow-hidden border",
+          "glass-card rounded-lg overflow-hidden border",
           "transition-all duration-500 hover:scale-[1.02]",
           "group relative w-full",
           colorVariants[project.color]
@@ -123,7 +127,7 @@ function BlockchainProjectCard({ project, index, isLast }: BlockchainProjectCard
           colorVariants[project.color], 
           bgVariants[project.color]
         )}>
-          <div className="absolute inset-0 rounded-full animate-pulse-glow" />
+          <div className="absolute inset-0 rounded-full animate-pulse-subtle" />
         </div>
         
         {/* Project image */}
@@ -131,11 +135,11 @@ function BlockchainProjectCard({ project, index, isLast }: BlockchainProjectCard
           <img 
             src={project.image} 
             alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className={cn(
-            "absolute inset-0 opacity-40",
-            `bg-gradient-to-b from-transparent via-transparent to-${bgVariants[project.color]}`
+            "absolute inset-0 opacity-30",
+            `bg-gradient-to-b from-transparent via-transparent to-${project.color === 'highlight' ? 'teal-900' : 'background'}`
           )}/>
         </div>
         
@@ -143,7 +147,7 @@ function BlockchainProjectCard({ project, index, isLast }: BlockchainProjectCard
         <div className="p-6 md:p-8">
           <h3 className={cn(
             "text-xl md:text-2xl font-bold mb-3",
-            `text-neon-${project.color}`
+            `text-${project.color === 'highlight' ? 'teal-500' : project.color}`
           )}>
             {project.title}
           </h3>
@@ -202,7 +206,7 @@ function BlockchainProjectCard({ project, index, isLast }: BlockchainProjectCard
         <div className="flex justify-center">
           <div className={cn(
             "h-16 w-0.5",
-            `bg-neon-${project.color === 'violet' ? 'pink' : project.color === 'pink' ? 'orange' : project.color === 'orange' ? 'cyan' : 'violet'}/30`
+            `bg-${nextColor}/30`
           )} />
         </div>
       )}

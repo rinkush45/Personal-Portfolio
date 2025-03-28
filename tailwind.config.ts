@@ -71,11 +71,13 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				neon: {
-					violet: '#9b87f5',
-					pink: '#D946EF',
-					orange: '#F97316',
-					cyan: '#22d3ee'
+				// Professional color palette
+				navy: '#1E2A38',
+				'navy-light': '#2A3A4A',
+				gold: '#FFD700',
+				teal: {
+					500: '#008080',
+					900: '#004040'
 				}
 			},
 			borderRadius: {
@@ -99,6 +101,10 @@ export default {
 				'pulse-glow': {
 					'0%, 100%': { opacity: '1', filter: 'brightness(1)' },
 					'50%': { opacity: '0.8', filter: 'brightness(1.2)' }
+				},
+				'pulse-subtle': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.7' }
 				},
 				'rotate-slow': {
 					'0%': { transform: 'rotate(0deg)' },
@@ -130,6 +136,7 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'float': 'float 3s ease-in-out infinite',
 				'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+				'pulse-subtle': 'pulse-subtle a2s ease-in-out infinite',
 				'rotate-slow': 'rotate-slow 10s linear infinite',
 				'slide-up': 'slide-up 0.5s ease-out forwards',
 				'slide-down': 'slide-down 0.5s ease-out forwards',
@@ -142,10 +149,19 @@ export default {
 				'neon-pink': '0 0 5px theme("colors.neon.pink"), 0 0 20px rgba(217, 70, 239, 0.3)',
 				'neon-orange': '0 0 5px theme("colors.neon.orange"), 0 0 20px rgba(249, 115, 22, 0.3)',
 				'neon-cyan': '0 0 5px theme("colors.neon.cyan"), 0 0 20px rgba(34, 211, 238, 0.3)',
+				'navy': '0 4px 6px rgba(30, 42, 56, 0.1)',
+				'gold': '0 0 5px theme("colors.gold"), 0 0 15px rgba(255, 215, 0, 0.2)',
+				'teal': '0 0 5px theme("colors.teal.500"), 0 0 15px rgba(0, 128, 128, 0.2)',
 			},
 			backgroundImage: {
-				'grid-pattern': 'linear-gradient(to right, rgba(155, 135, 245, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(155, 135, 245, 0.1) 1px, transparent 1px)',
+				'grid-pattern': 'linear-gradient(to right, rgba(160, 163, 167, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(160, 163, 167, 0.1) 1px, transparent 1px)',
 				'gradient-radial': 'radial-gradient(circle, var(--tw-gradient-stops))',
+				'subtle-grid': 'linear-gradient(to right, rgba(160, 163, 167, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(160, 163, 167, 0.05) 1px, transparent 1px)',
+			},
+			fontFamily: {
+				sans: ['Inter', 'system-ui', 'sans-serif'],
+				montserrat: ['Montserrat', 'sans-serif'],
+				roboto: ['Roboto', 'sans-serif'],
 			}
 		}
 	},
