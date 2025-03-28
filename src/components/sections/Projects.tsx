@@ -126,6 +126,19 @@ function BlockchainProjectCard({ project, index, isLast }: BlockchainProjectCard
           <div className="absolute inset-0 rounded-full animate-pulse-glow" />
         </div>
         
+        {/* Project image */}
+        <div className="w-full h-48 overflow-hidden">
+          <img 
+            src={project.image} 
+            alt={project.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+          <div className={cn(
+            "absolute inset-0 opacity-40",
+            `bg-gradient-to-b from-transparent via-transparent to-${bgVariants[project.color]}`
+          )}/>
+        </div>
+        
         {/* Project content */}
         <div className="p-6 md:p-8">
           <h3 className={cn(
