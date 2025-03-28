@@ -189,7 +189,7 @@ function BlockchainProjectCard({ project, index, isLast }: BlockchainProjectCard
         <div className="flex justify-center">
           <div className={cn(
             "h-16 w-0.5",
-            `bg-neon-${projects[index + 1].color}/30`
+            `bg-neon-${project.color === 'violet' ? 'pink' : project.color === 'pink' ? 'orange' : project.color === 'orange' ? 'cyan' : 'violet'}/30`
           )} />
         </div>
       )}
