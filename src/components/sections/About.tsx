@@ -26,12 +26,12 @@ export default function About() {
 
   return (
     <section id="about" className="py-16 md:py-20 relative overflow-hidden w-full flex items-center justify-center">
-      <div className="content-container">
+      <div className="w-full max-w-[100vw]">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="section-title">About Me</h2>
         </div>
         
-        <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16 w-full max-w-4xl mx-auto">
+        <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16 w-full px-4 sm:px-6 md:px-12 lg:px-24">
           <div className="glass-card glass-card-dark rounded-lg p-6 md:p-8 border border-neon-violet/30 shadow-neon-violet col-span-1 md:col-span-2 opacity-0 animate-slide-up">
             <div className="flex items-center gap-3 mb-4 md:mb-6">
               <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary flex items-center justify-center text-neon-violet">
