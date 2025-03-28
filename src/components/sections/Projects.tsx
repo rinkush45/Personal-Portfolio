@@ -118,7 +118,7 @@ function BlockchainProjectCard({ project, index, isLast }: BlockchainProjectCard
       >
         {/* Blockchain node indicator */}
         <div className={cn(
-          "absolute top-0 left-6 w-6 h-6 rounded-full -mt-3",
+          "absolute top-0 left-1/2 w-6 h-6 rounded-full -mt-3 -translate-x-1/2",
           "border-2 z-10",
           colorVariants[project.color], 
           bgVariants[project.color]
@@ -142,17 +142,17 @@ function BlockchainProjectCard({ project, index, isLast }: BlockchainProjectCard
         {/* Project content */}
         <div className="p-6 md:p-8">
           <h3 className={cn(
-            "text-xl md:text-2xl font-bold mb-3",
+            "text-xl md:text-2xl font-bold mb-3 text-center",
             `text-neon-${project.color}`
           )}>
             {project.title}
           </h3>
           
-          <p className="text-muted-foreground mb-4">
+          <p className="text-muted-foreground mb-4 text-center">
             {project.description}
           </p>
           
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex flex-wrap gap-2 mb-6 justify-center">
             {project.tags.map((tag, tagIndex) => (
               <span 
                 key={tagIndex} 
@@ -168,7 +168,7 @@ function BlockchainProjectCard({ project, index, isLast }: BlockchainProjectCard
             ))}
           </div>
           
-          <div className="flex gap-4">
+          <div className="flex gap-4 justify-center">
             <a 
               href={project.githubUrl} 
               target="_blank" 
