@@ -1,55 +1,79 @@
 
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { Send, Mail, Phone, MapPin } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { toast } from '@/components/ui/use-toast';
+import { supabase } from '@/integrations/supabase/client';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { ContactFormData } from '@/types/contact';
+import { Loader2 } from 'lucide-react';
+
+// Form validation schema using zod
+const formSchema = z.object({
+  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
+  email: z.string().email({ message: 'Please enter a valid email address.' }),
+  message: z.string().min(10, { message: 'Message must be at least 10 characters.' }),
+});
 
 export default function Contact() {
   const sectionRef = useScrollReveal();
-  const { toast } = useToast();
-  
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-  
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-  
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!formData.name || !formData.email || !formData.message) {
-      toast({
-        title: "Error",
-        description: "Please fill in all fields",
-        variant: "destructive"
-      });
-      return;
-    }
-    
+  // Initialize form with react-hook-form and zod validation
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      message: '',
+    },
+  });
+
+  // Submit handler
+  const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // Insert data into Supabase
+      const { error } = await supabase
+        .from('contact_messages')
+        .insert([data]);
+      
+      if (error) throw error;
+      
+      // Show success toast
       toast({
-        title: "Message sent!",
-        description: "Thank you for contacting me. I'll get back to you soon.",
+        title: 'Message sent successfully!',
+        description: 'Thank you for reaching out. I will get back to you soon.',
       });
       
-      setFormData({
-        name: '',
-        email: '',
-        message: ''
-      });
+      // Reset form
+      form.reset();
       
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      
+      // Show error toast
+      toast({
+        title: 'Something went wrong',
+        description: 'There was an error sending your message. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
   
   const contactInfo = [
@@ -63,131 +87,95 @@ export default function Contact() {
     {
       icon: <Phone className="w-5 h-5" />,
       title: "Phone",
-      value: "+91 7425949833",
-      link: "tel:+91-7425949833",
+      value: "+91 9876543210",
+      link: "tel:+919876543210",
       color: "text-neon-pink"
     },
     {
       icon: <MapPin className="w-5 h-5" />,
       title: "Location",
-      value: "Jaipur Rajasthan, India",
+      value: "New Delhi, India",
       link: null,
       color: "text-neon-orange"
     }
   ];
 
   return (
-    <section id="contact" className="py-20 relative overflow-hidden w-full flex items-center justify-center">
+    <section id="contact" className="py-20 relative overflow-hidden w-full">
       <div className="content-container">
         <div className="text-center mb-16">
           <h2 className="section-title">Get In Touch</h2>
+          <p className="section-subtitle max-w-2xl mx-auto">
+            Have a project in mind or want to discuss potential opportunities? Feel free to reach out!
+          </p>
         </div>
         
         <div 
           ref={sectionRef}
-          className="grid grid-cols-1 lg:grid-cols-5 gap-10"
+          className="max-w-md mx-auto glass-card glass-card-dark p-8 rounded-xl border border-neon-cyan/50 shadow-neon-cyan"
         >
-          <div className="lg:col-span-2 flex flex-col justify-between">
-            <div>
-              <h3 className="text-2xl font-semibold mb-6">Let's Talk</h3>
-              <p className="text-muted-foreground mb-8">
-                Have a project in mind or just want to chat about DevOps and cloud technologies? Feel free to reach out to me through any of these channels or by using the contact form.
-              </p>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               
-              <div className="space-y-6">
-                {contactInfo.map((info, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className={`p-3 rounded-full bg-secondary ${info.color}`}>
-                      {info.icon}
-                    </div>
-                    <div>
-                      <h4 className="font-medium">{info.title}</h4>
-                      {info.link ? (
-                        <a 
-                          href={info.link} 
-                          className="text-muted-foreground hover:text-foreground transition-colors duration-300"
-                        >
-                          {info.value}
-                        </a>
-                      ) : (
-                        <p className="text-muted-foreground">{info.value}</p>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          
-          <div className="lg:col-span-3">
-            <div className="glass-card glass-card-dark rounded-lg p-8 border border-neon-orange/30 shadow-neon-orange">
-              <h3 className="text-2xl font-semibold mb-6">Send Me a Message</h3>
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="your.email@example.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium mb-1">
-                        Name
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border focus:border-neon-orange/50 focus:shadow-neon-orange focus:outline-none transition-all duration-300"
-                        placeholder="Your name"
+              <FormField
+                control={form.control}
+                name="message"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Message</FormLabel>
+                    <FormControl>
+                      <Textarea 
+                        placeholder="Write your message here..." 
+                        className="min-h-[120px]" 
+                        {...field} 
                       />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-1">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border focus:border-neon-orange/50 focus:shadow-neon-orange focus:outline-none transition-all duration-300"
-                        placeholder="Your email"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-1">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows={5}
-                      className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border focus:border-neon-orange/50 focus:shadow-neon-orange focus:outline-none transition-all duration-300"
-                      placeholder="Your message"
-                    />
-                  </div>
-                </div>
-                
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-neon-orange to-neon-pink text-white font-medium hover:opacity-90 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-neon-orange/20"
-                >
-                  {isSubmitting ? (
-                    "Sending..."
-                  ) : (
-                    <>
-                      Send Message <Send className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
-              </form>
-            </div>
-          </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <Button 
+                type="submit" 
+                className="w-full bg-neon-cyan hover:bg-neon-cyan/80 text-background"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : 'Send Message'}
+              </Button>
+            </form>
+          </Form>
         </div>
       </div>
     </section>
