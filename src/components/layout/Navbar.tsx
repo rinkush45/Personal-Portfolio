@@ -103,7 +103,7 @@ export default function Navbar() {
             href="#contact" 
             className="text-sm font-medium bg-gradient-to-r from-neon-violet/90 to-neon-pink/90 text-white px-4 py-2 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-neon-pink/20 hover:opacity-90 backdrop-blur-sm"
           >
-            Book a Call
+            Contact Me
           </a>
           <ThemeToggle />
         </div>
