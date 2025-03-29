@@ -32,7 +32,7 @@ export default function About() {
         </div>
         
         <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16 w-full px-4 sm:px-6 md:px-12 lg:px-24">
-          <div className="glass-card glass-card-dark rounded-lg p-6 md:p-8 border border-neon-violet/30 shadow-neon-violet col-span-1 md:col-span-2 opacity-0 animate-slide-up flex flex-col items-center justify-center text-center">
+          <div className="glass-card glass-card-dark rounded-lg p-6 md:p-8 border border-neon-violet/30 shadow-neon-violet col-span-1 md:col-span-2 opacity-0 animate-slide-up flex flex-col items-center text-center">
             <div className="flex items-center gap-3 mb-4 md:mb-6">
               <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary flex items-center justify-center text-neon-violet">
                 <User className="w-5 h-5 md:w-6 md:h-6" />
@@ -40,7 +40,7 @@ export default function About() {
               <h3 className="text-lg md:text-xl font-semibold">Who I Am</h3>
             </div>
             
-            <div className="space-y-3 md:space-y-4 text-muted-foreground max-w-2xl mx-auto text-center">
+            <div className="space-y-3 md:space-y-4 text-muted-foreground max-w-2xl mx-auto">
               <p>
                 I'm Rinku Sharma, a passionate DevOps Engineer with expertise in cloud infrastructure, automation, and CI/CD pipelines. My journey in the tech world has been driven by a fascination with building efficient, scalable, and reliable systems.
               </p>

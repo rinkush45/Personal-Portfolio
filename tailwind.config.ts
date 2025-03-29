@@ -72,10 +72,10 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				neon: {
-					violet: '#1E2A38', // Navy Blue
-					pink: '#A0A3A7',   // Grey
-					orange: '#FFD700',  // Gold
-					cyan: '#008080'     // Teal
+					violet: '#9b87f5',
+					pink: '#D946EF',
+					orange: '#F97316',
+					cyan: '#22d3ee'
 				}
 			},
 			borderRadius: {
@@ -138,13 +138,13 @@ export default {
 				'fade-in': 'fade-in 0.5s ease-out forwards',
 			},
 			boxShadow: {
-				'neon-violet': '0 0 5px theme("colors.neon.violet"), 0 0 20px rgba(30, 42, 56, 0.3)',
-				'neon-pink': '0 0 5px theme("colors.neon.pink"), 0 0 20px rgba(160, 163, 167, 0.3)',
-				'neon-orange': '0 0 5px theme("colors.neon.orange"), 0 0 20px rgba(255, 215, 0, 0.3)',
-				'neon-cyan': '0 0 5px theme("colors.neon.cyan"), 0 0 20px rgba(0, 128, 128, 0.3)',
+				'neon-violet': '0 0 5px theme("colors.neon.violet"), 0 0 20px rgba(155, 135, 245, 0.3)',
+				'neon-pink': '0 0 5px theme("colors.neon.pink"), 0 0 20px rgba(217, 70, 239, 0.3)',
+				'neon-orange': '0 0 5px theme("colors.neon.orange"), 0 0 20px rgba(249, 115, 22, 0.3)',
+				'neon-cyan': '0 0 5px theme("colors.neon.cyan"), 0 0 20px rgba(34, 211, 238, 0.3)',
 			},
 			backgroundImage: {
-				'grid-pattern': 'linear-gradient(to right, rgba(160, 163, 167, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(160, 163, 167, 0.1) 1px, transparent 1px)',
+				'grid-pattern': 'linear-gradient(to right, rgba(155, 135, 245, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(155, 135, 245, 0.1) 1px, transparent 1px)',
 				'gradient-radial': 'radial-gradient(circle, var(--tw-gradient-stops))',
 			}
 		}

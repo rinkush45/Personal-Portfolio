@@ -12,7 +12,6 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
-  { label: 'Experience', href: '#experience' },
   { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
   { label: 'Certifications', href: '#certifications' },
@@ -60,7 +59,7 @@ export default function Navbar() {
           href="#home" 
           className="text-xl font-bold flex items-center gap-2"
         >
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-neon-violet to-neon-cyan">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-neon-violet to-neon-pink">
             Rinku Sharma
           </span>
         </a>
@@ -82,7 +81,7 @@ export default function Navbar() {
                   {item.label}
                   {activeSection === item.href.substring(1) && (
                     <span 
-                      className="absolute bottom-[-5px] left-0 w-full h-0.5 rounded-full bg-gradient-to-r from-neon-orange to-neon-cyan"
+                      className="absolute bottom-[-5px] left-0 w-full h-0.5 rounded-full bg-gradient-to-r from-neon-violet to-neon-pink"
                     />
                   )}
                 </a>
