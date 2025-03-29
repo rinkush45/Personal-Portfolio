@@ -4,6 +4,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import Hero from '@/components/sections/Hero';
 import About from '@/components/sections/About';
+import Experience from '@/components/sections/Experience'; // Import the new Experience section
 import Skills from '@/components/sections/Skills';
 import Projects from '@/components/sections/Projects';
 import Certifications from '@/components/sections/Certifications';
@@ -39,6 +40,7 @@ const Index = () => {
         <main className="flex-grow flex flex-col items-center justify-center w-full">
           <Hero />
           <About />
+          <Experience /> {/* Add the Experience section here */}
           <Skills />
           <Projects />
           <Certifications />
