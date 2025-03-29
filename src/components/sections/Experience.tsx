@@ -1,4 +1,3 @@
-
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { cn } from '@/lib/utils';
 import { Briefcase, Calendar, Circle, ArrowRight } from 'lucide-react';
@@ -55,10 +54,7 @@ export default function Experience() {
           className="flex flex-col items-center w-full px-4 sm:px-6 md:px-12 lg:px-24"
         >
           <div className="relative w-full max-w-3xl mx-auto">
-            {/* Timeline Center Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-px bg-gradient-to-b from-neon-violet to-neon-pink opacity-60"></div>
-            
-            {/* Experience Items */}
+            {/* Experience Items - Removed the timeline center line */}
             {experiences.map((exp, index) => (
               <div 
                 key={index} 
@@ -69,7 +65,7 @@ export default function Experience() {
                 )}
                 style={{ animationDelay: `${index * 150}ms` }}
               >
-                {/* Timeline Node */}
+                {/* Timeline Node - Keeping the nodes for visual appeal */}
                 <div className="absolute left-1/2 transform -translate-x-1/2 z-10 flex items-center justify-center">
                   <div className="w-4 h-4 rounded-full bg-neon-violet animate-pulse-glow"></div>
                 </div>
