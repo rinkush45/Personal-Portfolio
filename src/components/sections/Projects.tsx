@@ -109,7 +109,7 @@ function BlockchainProjectCard({ project, index, isLast }: BlockchainProjectCard
         className={cn(
           "glass-card glass-card-dark rounded-lg overflow-hidden border",
           "transition-all duration-500 hover:scale-[1.02]",
-          "group relative w-full",
+          "group relative w-full text-center",
           colorVariants[project.color]
         )}
         style={{ 
@@ -140,7 +140,7 @@ function BlockchainProjectCard({ project, index, isLast }: BlockchainProjectCard
         </div>
         
         {/* Project content */}
-        <div className="p-6 md:p-8">
+        <div className="p-6 md:p-8 flex flex-col items-center">
           <h3 className={cn(
             "text-xl md:text-2xl font-bold mb-3 text-center",
             `text-neon-${project.color}`
@@ -148,7 +148,7 @@ function BlockchainProjectCard({ project, index, isLast }: BlockchainProjectCard
             {project.title}
           </h3>
           
-          <p className="text-muted-foreground mb-4 text-center">
+          <p className="text-muted-foreground mb-4 text-center max-w-xl mx-auto">
             {project.description}
           </p>
           
