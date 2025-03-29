@@ -47,7 +47,9 @@ export default function Contact() {
     
     try {
       // Insert data into Supabase
-      const { error } = await supabase.from('contact_messages').insert([data]);
+      const { error } = await supabase
+        .from('contact_messages')
+        .insert([data]);
       
       if (error) throw error;
       
