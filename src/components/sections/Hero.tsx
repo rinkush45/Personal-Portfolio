@@ -3,12 +3,13 @@ import { useEffect, useRef } from 'react';
 import { ArrowDown, Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
+import aws from "@/images/aws-svgrepo-com.svg"
 
 // Tech icons
 const techIcons = [
   { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg', delay: 300, top: '15%', left: '80%', size: 'w-10 h-10' },
   { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg', delay: 500, top: '75%', left: '85%', size: 'w-8 h-8' },
-  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg', delay: 700, top: '25%', left: '10%', size: 'w-12 h-12' },
+  { src: aws, delay: 700, top: '25%', left: '10%', size: 'w-12 h-12' },
   { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg', delay: 900, top: '70%', left: '15%', size: 'w-9 h-9' },
   { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', delay: 1100, top: '10%', left: '40%', size: 'w-8 h-8' },
   { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg', delay: 1300, top: '80%', left: '40%', size: 'w-10 h-10' },

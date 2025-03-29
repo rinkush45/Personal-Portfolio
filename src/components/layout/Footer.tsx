@@ -5,13 +5,13 @@ export default function Footer() {
   const socialLinks = [
     {
       name: 'GitHub',
-      url: 'https://github.com/rinkusharma',
+      url: 'https://github.com/rinkush45',
       icon: <Github className="w-5 h-5" />,
       color: 'hover:text-neon-violet hover:scale-110'
     },
     {
       name: 'LinkedIn',
-      url: 'https://linkedin.com/in/rinkusharma',
+      url: 'https://linkedin.com/in/rinkush45',
       icon: <Linkedin className="w-5 h-5" />,
       color: 'hover:text-neon-pink hover:scale-110'
     },

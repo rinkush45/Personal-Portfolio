@@ -63,14 +63,14 @@ export default function Contact() {
     {
       icon: <Phone className="w-5 h-5" />,
       title: "Phone",
-      value: "+91 9876543210",
-      link: "tel:+919876543210",
+      value: "+91 7425949833",
+      link: "tel:+91-7425949833",
       color: "text-neon-pink"
     },
     {
       icon: <MapPin className="w-5 h-5" />,
       title: "Location",
-      value: "New Delhi, India",
+      value: "Jaipur Rajasthan, India",
       link: null,
       color: "text-neon-orange"
     }
