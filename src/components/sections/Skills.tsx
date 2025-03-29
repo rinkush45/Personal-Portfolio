@@ -1,6 +1,6 @@
-
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import AnimatedIcon from '../ui/AnimatedIcon';
+import aws from "@/images/aws-svgrepo-com.svg"
 
 export default function Skills() {
   const sectionRef = useScrollReveal();
@@ -11,7 +11,7 @@ export default function Skills() {
       skills: [
         { 
           name: "AWS", 
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg", 
+          icon: aws,
           color: "orange",
           description: "Amazon Web Services - EC2, ELB, RDS, S3, Lambda, CloudFormation, and more services for cloud computing."
         },
@@ -148,15 +148,15 @@ export default function Skills() {
           <h2 className="section-title">Technical Skills</h2>
         </div>
         
-        <div ref={sectionRef} className="space-y-12 w-full max-w-5xl mx-auto">
+        <div ref={sectionRef} className="space-y-12 w-full max-w-4xl mx-auto">
           {skillCategories.map((category, categoryIndex) => (
-            <div key={categoryIndex} className="mb-10">
-              <h3 className="text-xl font-semibold mb-6 inline-block relative text-center w-full">
+            <div key={categoryIndex} className="mb-10 text-center">
+              <h3 className="text-xl font-semibold mb-10 inline-block relative">
                 {category.name}
-                <span className="absolute bottom-[-5px] left-1/2 transform -translate-x-1/2 w-48 h-0.5 rounded-full bg-gradient-to-r from-neon-violet to-neon-pink"></span>
+                <span className="absolute bottom-[-5px] left-0 w-full h-0.5 rounded-full bg-gradient-to-r from-neon-violet to-neon-pink"></span>
               </h3>
               
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 justify-center">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-6 justify-items-center mx-auto max-w-3xl">
                 {category.skills.map((skill, skillIndex) => (
                   <AnimatedIcon
                     key={skillIndex}

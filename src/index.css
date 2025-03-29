@@ -218,3 +218,35 @@
     linear-gradient(to right, rgba(155, 135, 245, 0.1) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(155, 135, 245, 0.1) 1px, transparent 1px);
 }
+
+/* Typewriter animation styles */
+.typewriter-container {
+  display: inline-block;
+  font-family: sans-serif;
+}
+
+.typewriter-wrapper {
+  font-weight: 500;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  color: #f471b5; /* neon-pink color */
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Fade-in effect for new text */
+.Typewriter__wrapper {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0.3; }
+  to { opacity: 1; }
+}

@@ -1,9 +1,10 @@
-
 import { useEffect, useRef } from 'react';
 import { ArrowDown, Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import aws from "@/images/aws-svgrepo-com.svg"
+import Typewriter from 'typewriter-effect';
+import SocialLinks from "@/components/sections/SocialLinks";
 
 // Tech icons
 const techIcons = [
@@ -70,9 +71,26 @@ export default function Hero() {
       ))}
       
       <div className="content-container z-10 px-4 sm:px-6 md:px-8 text-center max-w-4xl">
-        <div className="mb-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/50 backdrop-blur-sm text-sm border border-border/50">
+        <div className="mb-3 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 backdrop-blur-sm text-sm border border-border/50 min-h-[40px] min-w-[220px]">
           <div className="w-2 h-2 rounded-full bg-neon-pink animate-pulse-glow"></div>
-          <span>DevOps Engineer</span>
+          <div className="typewriter-container">
+            <Typewriter
+              options={{
+                strings: [
+                  "DevOps Engineer",
+                  "Cloud & Automation Enthusiast",
+                  "AWS | Kubernetes | Terraform Specialist",
+                  "CI/CD Pipeline Expert"
+                ],
+                autoStart: true,
+                loop: true,
+                delay: 75,
+                deleteSpeed: 50,
+                wrapperClassName: "typewriter-wrapper",
+                cursorClassName: "typewriter-cursor",
+              }}
+            />
+          </div>
         </div>
         
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-neon-violet via-neon-pink to-neon-orange">
@@ -103,6 +121,10 @@ export default function Hero() {
             <Download className="w-4 h-4" /> 
             Download Resume
           </a>
+        </div>
+        
+        <div className="mt-8 flex justify-center">
+          <SocialLinks iconSize={24} />
         </div>
         
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">

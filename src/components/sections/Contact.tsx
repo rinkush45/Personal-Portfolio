@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -18,7 +17,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { ContactFormData } from '@/types/contact';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Mail, Phone, MapPin, SendIcon } from 'lucide-react';
 
 // Form validation schema using zod
 const formSchema = z.object({
@@ -75,107 +74,143 @@ export default function Contact() {
       setIsSubmitting(false);
     }
   };
-  
-  const contactInfo = [
-    {
-      icon: <Mail className="w-5 h-5" />,
-      title: "Email",
-      value: "sharmarinku@outlook.com",
-      link: "mailto:sharmarinku@outlook.com",
-      color: "text-neon-violet"
-    },
-    {
-      icon: <Phone className="w-5 h-5" />,
-      title: "Phone",
-      value: "+91 9876543210",
-      link: "tel:+919876543210",
-      color: "text-neon-pink"
-    },
-    {
-      icon: <MapPin className="w-5 h-5" />,
-      title: "Location",
-      value: "New Delhi, India",
-      link: null,
-      color: "text-neon-orange"
-    }
-  ];
 
   return (
     <section id="contact" className="py-20 relative overflow-hidden w-full">
       <div className="content-container">
-        <div className="text-center mb-16">
-          <h2 className="section-title">Get In Touch</h2>
-          <p className="section-subtitle max-w-2xl mx-auto">
-            Have a project in mind or want to discuss potential opportunities? Feel free to reach out!
-          </p>
-        </div>
-        
-        <div 
-          ref={sectionRef}
-          className="max-w-md mx-auto glass-card glass-card-dark p-8 rounded-xl border border-neon-cyan/50 shadow-neon-cyan"
-        >
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Your name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+          {/* Left Column - Contact Info */}
+          <div className="flex flex-col justify-center space-y-8">
+            <div>
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Let's Talk</h2>
+              <p className="text-gray-600 dark:text-gray-400 mb-10">
+                Have a project in mind or just want to chat about DevOps 
+                and cloud technologies? Feel free to reach out to me 
+                through any of these channels or by using the contact form.
+              </p>
+            </div>
+            
+            <div className="space-y-6">
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 rounded-full bg-violet-100/80 dark:bg-background/20 border border-violet-300 dark:border-neon-violet/30 flex items-center justify-center">
+                  <Mail className="w-5 h-5 text-violet-600 dark:text-neon-violet" />
+                </div>
+                <div>
+                  <div className="text-gray-500 dark:text-gray-400">Email</div>
+                  <a href="mailto:sharmarinku@outlook.com" className="text-gray-900 dark:text-white hover:text-violet-600 dark:hover:text-neon-cyan transition-colors">
+                    sharmarinku@outlook.com
+                  </a>
+                </div>
+              </div>
               
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="your.email@example.com" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 rounded-full bg-pink-100/80 dark:bg-background/20 border border-pink-300 dark:border-neon-pink/30 flex items-center justify-center">
+                  <Phone className="w-5 h-5 text-pink-600 dark:text-neon-pink" />
+                </div>
+                <div>
+                  <div className="text-gray-500 dark:text-gray-400">Phone</div>
+                  <a href="tel:+919876543210" className="text-gray-900 dark:text-white hover:text-violet-600 dark:hover:text-neon-cyan transition-colors">
+                    +91 9876543210
+                  </a>
+                </div>
+              </div>
               
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Message</FormLabel>
-                    <FormControl>
-                      <Textarea 
-                        placeholder="Write your message here..." 
-                        className="min-h-[120px]" 
-                        {...field} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <Button 
-                type="submit" 
-                className="w-full bg-neon-cyan hover:bg-neon-cyan/80 text-background"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Sending...
-                  </>
-                ) : 'Send Message'}
-              </Button>
-            </form>
-          </Form>
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 rounded-full bg-orange-100/80 dark:bg-background/20 border border-orange-300 dark:border-neon-orange/30 flex items-center justify-center">
+                  <MapPin className="w-5 h-5 text-orange-600 dark:text-neon-orange" />
+                </div>
+                <div>
+                  <div className="text-gray-500 dark:text-gray-400">Location</div>
+                  <div className="text-gray-900 dark:text-white">New Delhi, India</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Right Column - Contact Form */}
+          <div 
+            ref={sectionRef} 
+            className="bg-white dark:bg-transparent rounded-xl border border-gray-200 dark:border-gray-800 shadow-md dark:shadow-none p-8 dark:glass-card dark:glass-card-dark"
+          >
+            <h3 className="text-2xl font-bold mb-8 text-gray-900 dark:text-white">Send Me a Message</h3>
+            
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-gray-700 dark:text-gray-300">Name</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="Your name" 
+                            {...field} 
+                            className="bg-gray-50 dark:bg-gray-900/70 border-gray-200 dark:border-gray-800 focus:border-violet-400 dark:focus:border-violet-400" 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-gray-700 dark:text-gray-300">Email</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="Your email" 
+                            {...field} 
+                            className="bg-gray-50 dark:bg-gray-900/70 border-gray-200 dark:border-gray-800 focus:border-violet-400 dark:focus:border-violet-400" 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-gray-700 dark:text-gray-300">Message</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Your message" 
+                          className="min-h-[150px] bg-gray-50 dark:bg-gray-900/70 border-gray-200 dark:border-gray-800 focus:border-violet-400 dark:focus:border-violet-400" 
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <Button 
+                  type="submit" 
+                  className="w-full py-6 bg-gradient-to-r from-violet-600 to-pink-600 dark:from-neon-orange dark:to-neon-pink hover:opacity-90 text-white font-medium"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Send Message <SendIcon className="ml-2 h-4 w-4" />
+                    </>
+                  )}
+                </Button>
+              </form>
+            </Form>
+          </div>
         </div>
       </div>
     </section>

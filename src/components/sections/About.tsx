@@ -1,4 +1,3 @@
-
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { cn } from '@/lib/utils';
 import { User, Briefcase, Code, GitBranch } from 'lucide-react';
@@ -31,29 +30,29 @@ export default function About() {
           <h2 className="section-title">About Me</h2>
         </div>
         
-        <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16 w-full px-4 sm:px-6 md:px-12 lg:px-24">
-          <div className="glass-card glass-card-dark rounded-lg p-6 md:p-8 border border-neon-violet/30 shadow-neon-violet col-span-1 md:col-span-2 opacity-0 animate-slide-up flex flex-col items-center text-center">
-            <div className="flex items-center gap-3 mb-4 md:mb-6">
+        <div ref={sectionRef}>
+          <div className="mb-16 px-4 sm:px-6 md:px-12 lg:px-24 opacity-0 animate-slide-up">
+            <div className="flex items-center gap-3 mb-4 md:mb-6 justify-center">
               <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary flex items-center justify-center text-neon-violet">
                 <User className="w-5 h-5 md:w-6 md:h-6" />
               </div>
               <h3 className="text-lg md:text-xl font-semibold">Who I Am</h3>
             </div>
             
-            <div className="space-y-3 md:space-y-4 text-muted-foreground max-w-2xl mx-auto">
-              <p>
+            <div className="space-y-5 md:space-y-6 text-muted-foreground max-w-4xl mx-auto text-center">
+              <p className="text-base md:text-lg">
                 I'm Rinku Sharma, a passionate DevOps Engineer with expertise in cloud infrastructure, automation, and CI/CD pipelines. My journey in the tech world has been driven by a fascination with building efficient, scalable, and reliable systems.
               </p>
-              <p>
+              <p className="text-base md:text-lg">
                 With over 1.5 years of hands-on experience, I've worked across various domains including AI deployment platforms, web applications, and microservices architectures. My approach combines technical expertise with a problem-solving mindset to deliver robust solutions.
               </p>
-              <p>
+              <p className="text-base md:text-lg">
                 I thrive in collaborative environments where I can contribute to the entire software development lifecycle, from planning and infrastructure design to deployment and monitoring.
               </p>
             </div>
           </div>
           
-          <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto px-4 sm:px-6">
             {cards.map((card, index) => (
               <div 
                 key={index}

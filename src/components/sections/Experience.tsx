@@ -1,13 +1,15 @@
-
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { cn } from '@/lib/utils';
-import { Briefcase, Calendar, Circle, ArrowRight } from 'lucide-react';
+import { Briefcase, Calendar, ArrowRight } from 'lucide-react';
 
 interface ExperienceItem {
   role: string;
   company: string;
+  location: string;
   period: string;
   responsibilities: string[];
+  skills: string[];
+  isRemote?: boolean;
 }
 
 export default function Experience() {
@@ -17,106 +19,139 @@ export default function Experience() {
     {
       role: "DevOps Engineer",
       company: "Mobzway Technologies",
+      location: "Guwahati",
       period: "2024 - Present",
       responsibilities: [
         "Designed and optimized cloud infrastructure, improving deployment efficiency by 60%.",
         "Automated CI/CD pipelines, reducing manual deployment errors."
-      ]
+      ],
+      skills: ["AWS", "Kubernetes", "Terraform", "CI/CD", "Docker"],
+      isRemote: false
     },
     {
       role: "DevOps Engineer Intern",
       company: "Quibble AI",
+      location: "Guwahati",
       period: "2023",
       responsibilities: [
         "Developed infrastructure automation scripts for AWS & Kubernetes.",
         "Deployed AI models in cloud environments for scalable solutions."
-      ]
+      ],
+      skills: ["AWS", "Kubernetes", "Terraform", "Python", "Docker"],
+      isRemote: true
     },
     {
       role: "DevOps Intern",
       company: "Learn and Build",
+      location: "Guwahati",
       period: "2022 - 2023",
       responsibilities: [
         "Assisted in cloud migration projects, improving performance & security.",
         "Built monitoring dashboards using Prometheus & Grafana."
-      ]
+      ],
+      skills: ["AWS", "Monitoring", "Prometheus", "Grafana", "Docker"],
+      isRemote: true
     }
   ];
 
   return (
-    <section id="experience" className="py-16 md:py-20 relative overflow-hidden w-full flex items-center justify-center">
-      <div className="w-full max-w-[100vw]">
-        <div className="text-center mb-12 md:mb-16">
+    <section id="experience" className="py-20 relative overflow-hidden w-full flex items-center justify-center">
+      <div className="content-container max-w-6xl">
+        <div className="text-center mb-16">
           <h2 className="section-title">Experience</h2>
         </div>
         
-        <div
-          ref={sectionRef}
-          className="flex flex-col items-center w-full px-4 sm:px-6 md:px-12 lg:px-24"
-        >
-          <div className="relative w-full max-w-3xl mx-auto">
-            {/* Experience Items - Removed both timeline center line and nodes */}
-            {experiences.map((exp, index) => (
-              <div 
-                key={index} 
-                className={cn(
-                  "mb-12 md:mb-16 relative opacity-0",
-                  "flex flex-col md:flex-row md:items-center justify-center gap-4 md:gap-8",
-                  "animate-slide-up will-change-transform"
-                )}
-                style={{ animationDelay: `${index * 150}ms` }}
-              >
-                {/* Card */}
-                <div 
-                  className={cn(
-                    "glass-card glass-card-dark rounded-lg p-6 border w-full max-w-xl",
-                    "transition-all duration-300 hover:shadow-lg",
-                    index % 2 === 0 ? "border-neon-teal/40 shadow-neon-teal" : "border-neon-gold/40 shadow-neon-gold"
-                  )}
-                >
-                  {/* Role and Company */}
-                  <div className="flex flex-col md:flex-row md:items-center gap-2 mb-3">
-                    <div className="flex items-center gap-2">
-                      <Briefcase className={cn(
-                        "w-5 h-5",
-                        index % 2 === 0 ? "text-neon-teal" : "text-neon-gold"
-                      )} />
-                      <h3 className="text-lg md:text-xl font-semibold">{exp.role}</h3>
-                    </div>
-                    <span className="hidden md:inline-block mx-2 text-muted-foreground">•</span>
-                    <span className="text-base md:text-lg font-medium">{exp.company}</span>
-                  </div>
-                  
-                  {/* Period */}
-                  <div className="flex items-center gap-2 mb-4 text-muted-foreground">
-                    <Calendar className="w-4 h-4" />
-                    <span className="text-sm md:text-base">{exp.period}</span>
-                  </div>
-                  
-                  {/* Responsibilities */}
-                  <ul className="space-y-3">
-                    {exp.responsibilities.map((responsibility, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-sm md:text-base text-muted-foreground">
-                        <ArrowRight className="w-4 h-4 mt-1 flex-shrink-0" />
-                        <span>{responsibility}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="mt-8 flex justify-center">
-            <a 
-              href="#skills" 
-              className="inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 rounded-lg bg-gradient-to-r from-neon-violet to-neon-pink text-white font-medium hover:opacity-90 transition-all duration-300 hover:translate-y-[-2px] shadow-lg shadow-neon-pink/20"
-            >
-              Explore My Skills
-            </a>
-          </div>
+        <div ref={sectionRef} className="space-y-32">
+          {experiences.map((exp, index) => (
+            <ExperienceCard 
+              key={index}
+              experience={exp} 
+              index={index}
+            />
+          ))}
         </div>
       </div>
     </section>
+  );
+}
+
+interface ExperienceCardProps {
+  experience: ExperienceItem;
+  index: number;
+}
+
+function ExperienceCard({ experience, index }: ExperienceCardProps) {
+  const isEven = index % 2 === 0;
+  
+  return (
+    <div className={cn(
+      "relative flex flex-col md:flex-row items-center",
+      "opacity-0 animate-slide-up",
+      isEven ? "md:flex-row" : "md:flex-row-reverse"
+    )}
+    style={{ animationDelay: `${index * 200}ms` }}>
+      {/* Left/Right Side - Date Circle */}
+      <div className="w-full md:w-2/5 flex justify-center relative">
+        <div className="w-40 h-40 rounded-full bg-background-dark border border-border flex items-center justify-center relative">
+          <div className="text-center">
+            <Calendar className="w-6 h-6 text-neon-teal mx-auto mb-2" />
+            <div className="text-neon-teal font-medium">
+              {experience.period}
+            </div>
+          </div>
+          
+          {/* Timeline connecting dot for non-last items */}
+          {index < 2 && (
+            <div className={cn(
+              "absolute h-32 w-0.5 bg-neon-pink",
+              isEven ? "top-full" : "bottom-full",
+              "left-1/2 -translate-x-1/2"
+            )}></div>
+          )}
+        </div>
+      </div>
+      
+      {/* Right/Left Side - Content */}
+      <div className={cn(
+        "w-full md:w-3/5",
+        isEven ? "md:pl-8" : "md:pr-8",
+        "relative z-10 mt-6 md:mt-0"
+      )}>
+        <div className="text-sm text-neon-pink font-medium mb-1 flex items-center gap-2">
+          <Briefcase className="w-4 h-4" />
+          {experience.isRemote ? "Remote Position" : "Full Time"}
+        </div>
+        
+        <h3 className="text-2xl md:text-3xl font-bold mb-2 text-neon-pink">
+          {experience.role}
+        </h3>
+        
+        <h4 className="text-xl font-semibold mb-4 text-foreground/90">
+          {experience.company}, {experience.location}
+        </h4>
+        
+        <div className="glass-card glass-card-dark border border-border p-5 md:p-6 rounded-lg shadow-lg mb-4 backdrop-blur-sm">
+          <ul className="space-y-3 text-muted-foreground">
+            {experience.responsibilities.map((item, i) => (
+              <li key={i} className="flex items-start">
+                <ArrowRight className="w-4 h-4 mt-1 mr-2 text-neon-pink shrink-0" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <div className="flex flex-wrap gap-2">
+          {experience.skills.map((skill, skillIndex) => (
+            <span 
+              key={skillIndex} 
+              className="text-xs px-2.5 py-1 rounded-full bg-neon-teal/10 text-neon-teal border border-neon-teal/30"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }

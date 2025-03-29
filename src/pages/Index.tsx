@@ -39,9 +39,9 @@ const Index = () => {
         <Navbar />
         <main className="flex-grow flex flex-col items-center justify-center w-full">
           <Hero />
-          <About />
-          <Experience /> {/* Add the Experience section here */}
+          <About /> 
           <Skills />
+          <Experience />
           <Projects />
           <Certifications />
           <Contact />
