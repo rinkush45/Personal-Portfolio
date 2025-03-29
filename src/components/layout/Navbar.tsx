@@ -14,18 +14,31 @@ const navItems: NavItem[] = [
   { label: 'Skills', href: '#skills' },
   { label: 'Experience', href: '#experience'},
   { label: 'Projects', href: '#projects' },
-  { label: 'Certifications', href: '#certifications' },
   { label: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isNavbarHidden, setIsNavbarHidden] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  
+  // Track scroll direction
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      const currentScrollY = window.scrollY;
+      
+      // Determine if navbar should be hidden (scrolling down and past threshold)
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsNavbarHidden(true);
+      } else {
+        setIsNavbarHidden(false);
+      }
+      
+      setIsScrolled(currentScrollY > 10);
+      setLastScrollY(currentScrollY);
       
       // Find which section is currently in view
       const sections = navItems.map(item => item.href.substring(1));
@@ -43,12 +56,13 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   return (
     <header 
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full flex justify-center pt-4',
+        'fixed z-50 transition-all duration-300 w-full flex justify-center pt-4',
+        isNavbarHidden ? 'transform -translate-y-full' : 'transform translate-y-0',
         isScrolled ? 'py-2' : 'py-4'
       )}
     >
@@ -105,6 +119,19 @@ export default function Navbar() {
           </button>
         </div>
       </div>
+
+      {/* Floating Hamburger Menu Button (visible when navbar is hidden) */}
+      <button
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        className={cn(
+          'fixed top-4 left-4 p-3 bg-white/90 dark:bg-gray-800/90 rounded-full shadow-md z-50 md:hidden',
+          'transition-opacity duration-300 border border-gray-200/70 dark:border-gray-700/40',
+          isNavbarHidden ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        )}
+        aria-label="Open menu"
+      >
+        <Menu size={24} className="text-gray-800 dark:text-white" />
+      </button>
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
