@@ -63,8 +63,19 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-16 md:py-20 relative overflow-hidden w-full">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section 
+      id="about" 
+      className="py-16 md:py-20 relative overflow-hidden w-full grid-bg"
+    >
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-radial from-transparent to-background/80 z-0" />
+      
+      {/* Animated grid background */}
+      <div className="absolute inset-0 z-0">
+        <div className="h-full w-full bg-grid-pattern opacity-30" />
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="section-title">About Me</h2>
         </div>

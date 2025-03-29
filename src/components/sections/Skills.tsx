@@ -246,11 +246,15 @@ export default function Skills() {
   return (
     <section 
       id="skills" 
-      className="py-16 md:py-24 relative overflow-hidden w-full"
+      className="py-16 md:py-24 relative overflow-hidden w-full grid-bg"
     >
-      {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-black opacity-80 z-0" />
-      <div className="absolute inset-0 bg-grid-pattern opacity-30 z-0" />
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-radial from-transparent to-background/80 z-0" />
+      
+      {/* Animated grid background */}
+      <div className="absolute inset-0 z-0">
+        <div className="h-full w-full bg-grid-pattern opacity-30" />
+      </div>
       
       <div className="container mx-auto px-4 relative z-10">
         <motion.div 

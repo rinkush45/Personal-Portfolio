@@ -46,8 +46,19 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="py-20 relative overflow-hidden w-full flex items-center justify-center">
-      <div className="content-container max-w-6xl">
+    <section 
+      id="projects" 
+      className="py-20 relative overflow-hidden w-full flex items-center justify-center grid-bg"
+    >
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-radial from-transparent to-background/80 z-0" />
+      
+      {/* Animated grid background */}
+      <div className="absolute inset-0 z-0">
+        <div className="h-full w-full bg-grid-pattern opacity-30" />
+      </div>
+      
+      <div className="content-container max-w-6xl z-10">
         <div className="text-center mb-16">
           <h2 className="section-title">Things I've Worked on, Some of Them</h2>
         </div>

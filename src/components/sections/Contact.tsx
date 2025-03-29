@@ -76,8 +76,19 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 relative overflow-hidden w-full">
-      <div className="content-container">
+    <section 
+      id="contact" 
+      className="py-20 relative overflow-hidden w-full grid-bg"
+    >
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-radial from-transparent to-background/80 z-0" />
+      
+      {/* Animated grid background */}
+      <div className="absolute inset-0 z-0">
+        <div className="h-full w-full bg-grid-pattern opacity-30" />
+      </div>
+      
+      <div className="content-container z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto">
           {/* Left Column - Contact Info */}
           <div className="flex flex-col justify-center space-y-8">
