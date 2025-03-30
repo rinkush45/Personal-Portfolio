@@ -1,8 +1,10 @@
-import { useRef } from 'react';
+// import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import AnimatedIcon from '@/components/ui/AnimatedIcon';
+// import AnimatedIcon from '@/components/ui/AnimatedIcon';
 import aws from "@/images/aws-svgrepo-com.svg"
+import cloudformation from "@/images/aws-cloudformation.svg"
+import https from "@/images/https.svg"
 
 export default function Skills() {
   const { ref: sectionRef, inView } = useInView({
@@ -97,7 +99,7 @@ export default function Skills() {
         },
         { 
           name: "CloudFormation", 
-          icon: "https://symbols.getvecta.com/stencil_73/126_amazoncloudformation-icon.1e398e5f9f.svg", 
+          icon: cloudformation, 
           color: "orange",
           description: "AWS CloudFormation - Service for modeling and provisioning AWS resources using templates."
         }
@@ -166,7 +168,7 @@ export default function Skills() {
         },
         { 
           name: "HTTP/HTTPS", 
-          icon: "https://www.svgrepo.com/show/508319/network.svg", 
+          icon: https, 
           color: "violet",
           description: "HTTP/HTTPS - Protocols for transmitting hypertext requests between browsers and servers, with HTTPS adding encryption."
         }

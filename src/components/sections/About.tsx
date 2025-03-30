@@ -30,36 +30,46 @@ export default function About() {
   const certifications = [
     {
       title: "Internship Certificate in DevOps Engineering",
-      issuer: "Mobzway Technologies",
-      date: "June 2023",
-      url: "https://drive.google.com/file/d/YOURFILEID1/view",
+      issuer: "Learn and Build",
+      // date: "June 2023",
+      url: "https://drive.google.com/file/u/1/d/10Z4DcOwN6_GiI2xJSKRDT4ZC35M5fVXC/view?usp=drivesdk&pli=1",
       color: "orange",
       delay: 0
     },
     {
       title: "Kubernetes Training Certification",
-      issuer: "Learn and Build",
-      date: "March 2023",
-      url: "https://drive.google.com/file/d/YOURFILEID2/view",
+      issuer: "LinuxWorld Informatics Pvt. Ltd.",
+      // date: "March 2023",
+      url: "https://drive.google.com/file/d/1SbI8P-UplR_AvxGgnR9LL3PEkgfQ83Cm/view",
       color: "violet",
       delay: 1
     },
     {
-      title: "OpenStack & Python Training Certification",
-      issuer: "Quibble AI",
-      date: "December 2022",
-      url: "https://drive.google.com/file/d/YOURFILEID3/view",
+      title: "Python Training Certification",
+      issuer: "LinuxWorld Informatics Pvt. Ltd.",
+      // date: "December 2022",
+      url: "https://drive.google.com/file/d/1dop9sjBnVafPIE37G8dHJ-Ryg7U4uzYe/view",
+      
       color: "pink",
       delay: 2
     },
     {
       title: "AWS Cloud Practitioner",
       issuer: "Amazon Web Services",
-      date: "September 2022",
+      // date: "September 2022",
       url: "https://drive.google.com/file/d/YOURFILEID4/view",
       color: "cyan",
       delay: 3
-    }
+    },
+    {
+      title: "OpenStack Certificate",
+      issuer: "LinuxWorld Informatics Pvt. Ltd.",
+      // date: "December 2022",
+      url: "https://drive.google.com/file/d/1lvX8GuEkbMj_Zff9Ed_daTphyf__-A13/view",
+      
+      color: "Blue",
+      delay: 2
+    },
   ];
 
   return (
@@ -96,13 +106,13 @@ export default function About() {
               
               <div className="space-y-3 md:space-y-4 text-gray-700 dark:text-muted-foreground">
                 <p className="text-base md:text-lg">
-                  I'm Rinku Sharma, a passionate DevOps Engineer with expertise in cloud infrastructure, automation, and CI/CD pipelines. My journey in the tech world has been driven by a fascination with building efficient, scalable, and reliable systems.
+                I am Rinku Sharma, a DevOps Engineer with expertise in cloud infrastructure, automation, and CI/CD pipelines. My primary focus is on building scalable, resilient, and highly available systems using modern DevOps methodologies and cloud-native technologies.
                 </p>
                 <p className="text-base md:text-lg">
-                  With over 1.5 years of hands-on experience, I've worked across various domains including AI deployment platforms, web applications, and microservices architectures. My approach combines technical expertise with a problem-solving mindset to deliver robust solutions.
+                With 1.5+ years of experience, I have worked extensively across AI deployment platforms, web applications, and microservices architectures, leveraging tools like AWS, Kubernetes, Terraform, and Docker to streamline infrastructure management and optimize performance.
                 </p>
                 <p className="text-base md:text-lg">
-                  I thrive in collaborative environments where I can contribute to the entire software development lifecycle, from planning and infrastructure design to deployment and monitoring.
+                I specialize in automating deployment workflows, implementing infrastructure as code (IaC), and optimizing monitoring and logging to ensure seamless operations. My approach combines deep technical expertise with problem-solving skills, allowing me to enhance efficiency, security, and cost-effectiveness in cloud environments.
                 </p>
               </div>
             </div>

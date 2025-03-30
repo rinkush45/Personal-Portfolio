@@ -18,39 +18,42 @@ export default function Experience() {
   const experiences: ExperienceItem[] = [
     {
       role: "DevOps Engineer",
-      company: "Mobzway Technologies",
-      location: "Guwahati",
-      period: "2024 - Present",
+      company: "QUibble AI Pvt. Ltd.",
+      location: "Jaipur",
+      period: "June 2024 - Present",
       responsibilities: [
-        "Designed and optimized cloud infrastructure, improving deployment efficiency by 60%.",
-        "Automated CI/CD pipelines, reducing manual deployment errors."
+        "Used AI models in real applications by connecting them with APIs and running them smoothly using tools like Docker and Kubernetes.",
+        "Deployed AI models on AWS, handling environment setup, resource management, and performance optimization.",
+        "Set up Prometheus and Grafana to track system health in real-time, which helped reduce the time to fix issues by 30% and made the systems more reliable."
       ],
-      skills: ["AWS", "Kubernetes", "Terraform", "CI/CD", "Docker"],
+      skills: ["Docker", "Kubernetes", "AWS", "Terraform", "Jenkins", "CI/CD", "Ansible", "Azure", "Prometheus/Grafana", "GitOps", "Linux/Shell Scripting", "ELK Stack"],
+      isRemote: false
+    },
+    {
+      role: "Backend  Engineer Intern",
+      company: "Learn and Build",
+      location: "Jaipur",
+      period: "September 2023 - November  2023",
+      responsibilities: [
+        "Documented APIs and database schemas to enhance future development and maintainability.",
+        "Developed and optimized backend services using Node.js, Express.js, and PostgreSQL.",
+        "Set up and managed databases like MongoDB and Postgres, making sure the data was stored efficiently and could be accessed quickly"
+      ],
+      skills: ["Node.js", "Express", "MongoDB", "PostgreSQL", "Python", "RESTful APIs"],
       isRemote: false
     },
     {
       role: "DevOps Engineer Intern",
-      company: "Quibble AI",
-      location: "Guwahati",
-      period: "2023",
-      responsibilities: [
-        "Developed infrastructure automation scripts for AWS & Kubernetes.",
-        "Deployed AI models in cloud environments for scalable solutions."
-      ],
-      skills: ["AWS", "Kubernetes", "Terraform", "Python", "Docker"],
-      isRemote: true
-    },
-    {
-      role: "DevOps Intern",
       company: "Learn and Build",
-      location: "Guwahati",
-      period: "2022 - 2023",
+      location: "Jaipur",
+      period: "March 2023 - August 2023",
       responsibilities: [
-        "Assisted in cloud migration projects, improving performance & security.",
-        "Built monitoring dashboards using Prometheus & Grafana."
+        "Implemented CI/CD pipelines for seamless application deployment.",
+        "Automated infrastructure deployment using Jenkins and Terraform, reducing deployment time by 80%.",
+        "Deployed and monitored Kubernetes clusters with Docker, Prometheus, and the ELK Stack."
       ],
-      skills: ["AWS", "Monitoring", "Prometheus", "Grafana", "Docker"],
-      isRemote: true
+      skills: ["Docker", "Kubernetes", "AWS", "Terraform", "Jenkins", "CI/CD"],
+      isRemote: false
     }
   ];
 
