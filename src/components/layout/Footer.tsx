@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const footerRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -15,11 +15,11 @@ export default function Footer() {
       },
       { threshold: 0.1 }
     );
-    
+
     if (footerRef.current) {
       observer.observe(footerRef.current);
     }
-    
+
     return () => {
       if (footerRef.current) {
         observer.unobserve(footerRef.current);
@@ -51,10 +51,11 @@ export default function Footer() {
     },
     {
       name: 'Resume',
-      url: '#',
+      url: '/public/resume/Rinku-Sharma.pdf',
       icon: <FileText className="w-5 h-5" />,
       color: 'group-hover:text-neon-cyan',
-      bgColor: 'group-hover:bg-neon-cyan/10'
+      bgColor: 'group-hover:bg-neon-cyan/10',
+      download: true
     }
   ];
 
@@ -80,8 +81,8 @@ export default function Footer() {
     },
     {
       icon: <Phone className="w-4 h-4" />,
-      text: '+91 98765 43210',
-      href: 'tel:+919876543210'
+      text: '+91 7425949833',
+      href: 'tel:+917425949833'
     }
   ];
 
@@ -92,7 +93,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer 
+    <footer
       ref={footerRef}
       className="relative py-10 md:py-16 bg-secondary/30 backdrop-blur-sm border-t border-border w-full overflow-hidden grid-bg"
       style={{
@@ -101,7 +102,7 @@ export default function Footer() {
     >
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-radial from-transparent to-background/80 z-0" />
-      
+
       {/* Animated grid background */}
       <div className="absolute inset-0 z-0">
         <div className="h-full w-full bg-grid-pattern opacity-30" />
@@ -150,7 +151,7 @@ export default function Footer() {
           animation: pulse 1.5s ease infinite;
         }
       `}</style>
-    
+
       <div className="content-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-10">
           {/* Column 1: About */}
@@ -167,15 +168,15 @@ export default function Footer() {
                   </p>
                 </div>
               </div>
-              
+
               <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
                 Passionate about building reliable, scalable cloud infrastructure and automating development processes.
               </p>
-              
+
               <div className="flex flex-wrap gap-3 mb-5">
                 {expertise.map((item, idx) => (
-                  <div 
-                    key={idx} 
+                  <div
+                    key={idx}
                     className="flex items-center gap-1.5 bg-secondary/50 backdrop-blur-sm text-xs text-muted-foreground px-3 py-1.5 rounded-full border border-border/50"
                   >
                     {item.icon}
@@ -183,7 +184,7 @@ export default function Footer() {
                   </div>
                 ))}
               </div>
-              
+
               <div className="flex space-x-3">
                 {socialLinks.map((link) => (
                   <a
@@ -192,8 +193,8 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn(
-                      "group p-2.5 rounded-full bg-background border border-border/60 transition-all duration-300", 
-                      "hover:scale-110 hover:shadow-md hover:border-transparent", 
+                      "group p-2.5 rounded-full bg-background border border-border/60 transition-all duration-300",
+                      "hover:scale-110 hover:shadow-md hover:border-transparent",
                       link.bgColor
                     )}
                     aria-label={link.name}
@@ -218,7 +219,7 @@ export default function Footer() {
                 <ul className="grid grid-cols-2 gap-2">
                   {navLinks.map((link) => (
                     <li key={link.name}>
-                      <a 
+                      <a
                         href={link.href}
                         className="group flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
                       >
@@ -245,7 +246,7 @@ export default function Footer() {
                     <span className="mr-3 p-2 bg-secondary/60 rounded-full text-neon-violet group-hover:bg-neon-violet/20 transition-all duration-300 flex-shrink-0">
                       {info.icon}
                     </span>
-                    <a 
+                    <a
                       href={info.href}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -271,7 +272,7 @@ export default function Footer() {
                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                   Looking for a DevOps engineer to help with your project? Let's talk about how I can contribute to your team.
                 </p>
-                <a 
+                <a
                   href="#contact"
                   className="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-gradient-to-r from-neon-violet to-neon-pink text-white text-sm font-medium transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg hover:shadow-neon-pink/20 group"
                 >
