@@ -290,7 +290,7 @@ export default function Footer() {
             <p className="text-sm text-muted-foreground mb-4 md:mb-0 animate-footer-fade-up">
               © {currentYear} Rinku Sharma. All Rights Reserved.
             </p>
-            <p className="text-xs text-muted-foreground flex items-center gap-1 animate-footer-fade-up" style={{ animationDelay: 'calc(var(--stagger-delay) * 5)' }}>
+            <p className="text-xs text-muted-foreground flex items-center gap-2 animate-footer-fade-up" style={{ animationDelay: 'calc(var(--stagger-delay) * 5)' }}>
               Designed & Built with <Heart className="w-3 h-3 text-neon-pink heart-icon" fill="currentColor" /> using React, Next.js & TailwindCSS
             </p>
           </div>
