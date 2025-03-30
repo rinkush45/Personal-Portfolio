@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowDown, Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -20,6 +20,7 @@ export default function Hero() {
   // Refs for animated elements
   const techIconsRef = useRef<(HTMLDivElement | null)[]>([]);
   const isMobile = useIsMobile();
+  const [techClass, setTechClass] = useState("neon-glow-text-violet");
   
   useEffect(() => {
     // Animate tech icons into view with delays
@@ -99,10 +100,48 @@ export default function Hero() {
         
         <h2 className="text-xl md:text-2xl max-w-3xl mx-auto mb-8 leading-relaxed text-foreground/80">
           Cloud & Automation Enthusiast with expertise in 
-          <span className="neon-glow-text-violet font-semibold"> AWS</span>,
-          <span className="neon-glow-text-cyan font-semibold"> Kubernetes</span>,
-          <span className="neon-glow-text-pink font-semibold"> Terraform</span> & 
-          <span className="neon-glow-text-orange font-semibold"> CI/CD</span>
+          <span className="font-semibold">
+            <Typewriter
+              onInit={(typewriter) => {
+                typewriter
+                  .typeString('<span class="neon-glow-text-violet"> AWS</span>')
+                  .pauseFor(1000)
+                  .deleteAll()
+                  .typeString('<span class="neon-glow-text-orange"> GCP</span>')
+                  .pauseFor(1000)
+                  .deleteAll()
+                  .typeString('<span class="neon-glow-text-orange"> Azure</span>')
+                  .pauseFor(1000)
+                  .deleteAll()
+                  .typeString('<span class="neon-glow-text-orange"> Infrastructure as Code and Automation</span>')
+                  .pauseFor(1000)
+                  .deleteAll()
+                  .typeString('<span class="neon-glow-text-orange"> CI/CD</span>')
+                  .pauseFor(1000)
+                  .deleteAll()
+                  .typeString('<span class="neon-glow-text-cyan"> Containerization and Orchestration</span>')
+                  .pauseFor(1000)
+                  .deleteAll()
+                  .typeString('<span class="neon-glow-text-pink"> Monitoring and Observability</span>')
+                  .pauseFor(1000)
+                  .deleteAll()
+                  .typeString('<span class="neon-glow-text-orange"> OS and Networking</span>')
+                  .pauseFor(1000)
+                  .deleteAll()
+                  .start();
+              }}
+              options={{
+                autoStart: true,
+                loop: true,
+                delay: 80,
+                deleteSpeed: 40,
+                cursor: '|',
+                wrapperClassName: "inline",
+                cursorClassName: "text-neon-pink",
+                skipAddStyles: true,
+              }}
+            />
+          </span>
         </h2>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
