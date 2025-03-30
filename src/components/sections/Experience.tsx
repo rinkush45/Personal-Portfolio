@@ -111,14 +111,7 @@ function ExperienceCard({ experience, index }: ExperienceCardProps) {
             </div>
           </div>
           
-          {/* Timeline connecting dot for non-last items */}
-          {index < 2 && (
-            <div className={cn(
-              "absolute h-32 w-0.5 bg-neon-pink",
-              isEven ? "top-full" : "bottom-full",
-              "left-1/2 -translate-x-1/2"
-            )}></div>
-          )}
+          {/* Timeline connecting dot removed */}
         </div>
       </div>
       
