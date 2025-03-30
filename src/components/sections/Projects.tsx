@@ -1,10 +1,11 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { cn } from '@/lib/utils';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, ArrowRight } from 'lucide-react';
+import hotstar from "@/images/hotstart.jpeg"
 
 interface Project {
   title: string;
-  description: string;
+  description: string[];
   image: string;
   tags: string[];
   githubUrl: string;
@@ -17,30 +18,43 @@ export default function Projects() {
   
   const projects: Project[] = [
     {
-      title: "Civom AI",
-      description: "Deployed and managed infrastructure for an AI-powered platform using AWS, Kubernetes, and Terraform. Implemented CI/CD pipelines for automated testing and deployment, resulting in a 60% reduction in deployment time and improved reliability.",
+      title: "Civom-AI Deployment: [A Combination of Multiple AI Models] ",
+      description: [
+        "Built an AI-powered platform for generating conversations, videos, images, code, and music",
+        "Deployed LLMs on AWS with auto-scaling and monitoring mechanisms",
+        "Implemented Blue-Green deployments to ensure zero downtime during releases",
+      ],
       image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
       tags: ["AWS", "Kubernetes", "Terraform", "CI/CD", "Docker"],
-      githubUrl: "#",
-      liveUrl: "#",
+      githubUrl: "https://github.com/rinkush45/Civom-ai",
+      liveUrl: "https://civom-ai.vercel.app/",
       featured: true
     },
     {
-      title: "FreeDevs",
-      description: "Designed and implemented backend infrastructure for a freelancer marketplace using AWS services including EC2, ELB, RDS, and S3. Set up auto-scaling capabilities and monitoring using CloudWatch and Prometheus, ensuring 99.9% uptime and optimal performance during peak usage.",
+      title: "FreeDevs: [Freelancer Website]",
+      description: [
+        "Deployed and managed the platform’s backend using AWS EC2, RDS, and S3.",
+        "Implemented CI/CD pipelines for automated deployment and updates.",
+        "Ensured high availability with load balancing and auto-scaling.",
+        "Monitored infrastructure performance using Prometheus & Grafana."
+      ],
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
       tags: ["AWS", "Auto-scaling", "Prometheus", "Grafana", "Backend"],
-      githubUrl: "#",
-      liveUrl: "#",
+      githubUrl: "https://github.com/rinkush45/FreeDev",
+      liveUrl: "https://freedevs.netlify.app/",
       featured: true
     },
     {
-      title: "Hotstar Clone",
-      description: "Created a fully automated cloud deployment for a Hotstar clone using Terraform and AWS. Implemented a microservices architecture with containerized applications, and set up automated testing and continuous deployment workflows, reducing development cycle time by 40%.",
-      image: "https://images.unsplash.com/photo-1593697821252-0c9137d9fc45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80",
-      tags: ["Terraform", "AWS", "Microservices", "Docker", "CI/CD"],
-      githubUrl: "#",
-      liveUrl: "#",
+      title: "Hotstar: [Hotstar Clone Deployment]",
+      description: [
+          "Integrated CI/CD pipelines for automated deployment and testing.",
+          "Deployed application infrastructure using AWS & Terraform.",
+          "Conducted thorough testing post-deployment to ensure seamless user experience"
+        ],
+        image: hotstar,
+        tags: ["Terraform", "AWS", "Microservices", "Docker", "CI/CD"],
+        githubUrl: "https://github.com/rinkush45/hotstar-clone",
+        liveUrl: "https://app-hotstar.netlify.app/",
       featured: true
     }
   ];
@@ -129,7 +143,14 @@ function ProjectCard({ project, index }: ProjectCardProps) {
         </h3>
         
         <div className="glass-card glass-card-dark border border-border p-5 md:p-6 rounded-lg shadow-lg mb-4 backdrop-blur-sm">
-          <p className="text-muted-foreground">{project.description}</p>
+          <ul className="space-y-3 text-muted-foreground">
+            {project.description.map((item, i) => (
+              <li key={i} className="flex items-start">
+                <ArrowRight className="w-4 h-4 mt-1 mr-2 text-neon-pink shrink-0" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
         
         <div className="flex flex-wrap gap-2 mb-4">
