@@ -153,21 +153,24 @@ ${userMessage}`,
       id="contact" 
       className="py-20 relative overflow-hidden w-full grid-bg"
     >
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-radial from-transparent to-background/80 z-0" />
+      {/* Gradient overlay with reduced opacity for more brightness */}
+      <div className="absolute inset-0 bg-gradient-radial from-transparent to-background/60 z-0" />
       
-      {/* Animated grid background */}
+      {/* Animated grid background with increased opacity */}
       <div className="absolute inset-0 z-0">
-        <div className="h-full w-full bg-grid-pattern opacity-30" />
+        <div className="h-full w-full bg-grid-pattern opacity-40" />
       </div>
+      
+      {/* Added subtle light effect */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-40 bg-neon-violet/30 blur-[100px] rounded-full z-0"></div>
       
       <div className="content-container z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto">
-          {/* Left Column - Contact Info */}
+          {/* Left Column - Contact Info with enhanced contrast */}
           <div className="flex flex-col justify-center space-y-8">
             <div>
-              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Let's Talk</h2>
-              <p className="text-gray-600 dark:text-gray-400 mb-10">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white drop-shadow-sm">Let's Talk</h2>
+              <p className="text-gray-700 dark:text-gray-300 mb-10">
                 Have a project in mind or just want to chat about DevOps 
                 and cloud technologies? Feel free to reach out to me 
                 through any of these channels or by using the contact form.
@@ -175,37 +178,37 @@ ${userMessage}`,
             </div>
             
             <div className="space-y-6">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 rounded-full bg-violet-100/80 dark:bg-background/20 border border-violet-300 dark:border-neon-violet/30 flex items-center justify-center">
+              <div className="flex items-center space-x-4 group hover:scale-[1.02] transition-transform">
+                <div className="w-12 h-12 rounded-full bg-violet-100/90 dark:bg-violet-900/20 border-2 border-violet-300 dark:border-neon-violet/60 flex items-center justify-center shadow-md shadow-violet-500/10 dark:shadow-neon-violet/20">
                   <Mail className="w-5 h-5 text-violet-600 dark:text-neon-violet" />
                 </div>
                 <div>
-                  <div className="text-gray-500 dark:text-gray-400">Email</div>
-                  <a href="mailto:sharmarinku@outlook.com" className="text-gray-900 dark:text-white hover:text-violet-600 dark:hover:text-neon-cyan transition-colors">
+                  <div className="text-gray-600 dark:text-gray-300 font-medium">Email</div>
+                  <a href="mailto:sharmarinku@outlook.com" className="text-gray-900 dark:text-white hover:text-violet-600 dark:hover:text-neon-cyan transition-colors font-medium">
                     sharmarinku@outlook.com
                   </a>
                 </div>
               </div>
               
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 rounded-full bg-pink-100/80 dark:bg-background/20 border border-pink-300 dark:border-neon-pink/30 flex items-center justify-center">
+              <div className="flex items-center space-x-4 group hover:scale-[1.02] transition-transform">
+                <div className="w-12 h-12 rounded-full bg-pink-100/90 dark:bg-pink-900/20 border-2 border-pink-300 dark:border-neon-pink/60 flex items-center justify-center shadow-md shadow-pink-500/10 dark:shadow-neon-pink/20">
                   <Phone className="w-5 h-5 text-pink-600 dark:text-neon-pink" />
                 </div>
                 <div>
-                  <div className="text-gray-500 dark:text-gray-400">Phone</div>
-                  <a href="tel:+919876543210" className="text-gray-900 dark:text-white hover:text-violet-600 dark:hover:text-neon-cyan transition-colors">
-                    +91 9876543210
+                  <div className="text-gray-600 dark:text-gray-300 font-medium">Phone</div>
+                  <a href="tel:+917425949833" className="text-gray-900 dark:text-white hover:text-violet-600 dark:hover:text-neon-cyan transition-colors font-medium">
+                    +91 7425949833
                   </a>
                 </div>
               </div>
               
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 rounded-full bg-orange-100/80 dark:bg-background/20 border border-orange-300 dark:border-neon-orange/30 flex items-center justify-center">
+              <div className="flex items-center space-x-4 group hover:scale-[1.02] transition-transform">
+                <div className="w-12 h-12 rounded-full bg-orange-100/90 dark:bg-orange-900/20 border-2 border-orange-300 dark:border-neon-orange/60 flex items-center justify-center shadow-md shadow-orange-500/10 dark:shadow-neon-orange/20">
                   <MapPin className="w-5 h-5 text-orange-600 dark:text-neon-orange" />
                 </div>
                 <div>
-                  <div className="text-gray-500 dark:text-gray-400">Location</div>
-                  <div className="text-gray-900 dark:text-white">New Delhi, India</div>
+                  <div className="text-gray-600 dark:text-gray-300 font-medium">Location</div>
+                  <div className="text-gray-900 dark:text-white font-medium">Jaipur, Rajasthan, India</div>
                 </div>
               </div>
             </div>
