@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/form';
 import { ContactFormData } from '@/types/contact';
 import { Loader2, Mail, Phone, MapPin, SendIcon } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 // Form validation schema using zod
 const formSchema = z.object({
@@ -45,14 +46,86 @@ export default function Contact() {
     setIsSubmitting(true);
     
     try {
-      // Insert data into Supabase
-      const { error } = await supabase
-        .from('contact_messages')
-        .insert([data]);
+      // Extract and verify user data
+      const userEmail = data.email;
+      const userName = data.name;
+      const userMessage = data.message;
       
-      if (error) throw error;
+      console.log("Submitting form data:", {
+        name: userName,
+        email: userEmail, // Log to verify we have the email
+        message: userMessage
+      });
       
-      // Show success toast
+      try {
+        // ===== OWNER EMAIL NOTIFICATION =====
+        // User form data goes to owner
+        const ownerNotificationParams = {
+          // User form data to be displayed in email to owner
+          name: userName,
+          email: userEmail,
+          message: `From: ${userName} (${userEmail})
+          
+Message:
+${userMessage}`,
+          
+          // Owner email address (recipient)
+          to_email: 'rinkusharma9833@gmail.com',
+          to_name: 'Rinku Sharma',
+        };
+        
+        console.log("SENDING TO OWNER:", ownerNotificationParams);
+        
+        const ownerEmailResult = await emailjs.send(
+          'service_9cgwmhk', // Your EmailJS service ID
+          'template_r8wx1ib', // Your OWNER notification template ID
+          ownerNotificationParams,
+          'CABC8lcIA4gthzRug' // Your EmailJS public key
+        );
+        console.log("✓ Email sent TO OWNER at rinkusharma9833@gmail.com:", ownerEmailResult);
+        
+        // ===== USER AUTO-REPLY EMAIL =====
+        // This sends a confirmation message back to the user
+        const userAutoReplyParams = {
+          // Just what's needed for auto-reply
+          name: userName,
+          email: 'rinkusharma9833@gmail.com', // Your email as the sender
+          message: `Thank you for contacting me. I'll get back to you soon!`,
+          to_email: userEmail,  // Send to user's email address
+          to_name: userName,
+          reply_to: 'rinkusharma9833@gmail.com', // Set reply-to as your email
+        };
+        
+        console.log("SENDING TO USER:", userAutoReplyParams);
+        console.log("User's email address:", userEmail); // Extra verification
+        
+        const userEmailResult = await emailjs.send(
+          'service_9cgwmhk', // Your EmailJS service ID
+          'template_1n3sy2e', // Your USER auto-reply template ID
+          userAutoReplyParams,
+          'CABC8lcIA4gthzRug' // Your EmailJS public key
+        );
+        console.log("✓ Email sent TO USER at " + userEmail + ":", userEmailResult);
+      } catch (emailError) {
+        console.error("EmailJS error:", emailError);
+        // Continue execution even if email fails
+      }
+      
+      // Then try to save to Supabase
+      try {
+        const { error } = await supabase
+          .from('contact_messages')
+          .insert([data]);
+        
+        if (error) {
+          console.error("Supabase error:", error);
+        }
+      } catch (dbError) {
+        console.error("Supabase error:", dbError);
+        // Continue execution even if database fails
+      }
+      
+      // Show success toast if we got this far
       toast({
         title: 'Message sent successfully!',
         description: 'Thank you for reaching out. I will get back to you soon.',
