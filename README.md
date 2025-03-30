@@ -1,69 +1,110 @@
-# Welcome to your Lovable project
+# Rinku Sharma - DevOps Engineer Portfolio
 
-## Project info
+![Portfolio Banner](public/resume/banner.png)
 
-**URL**: https://lovable.dev/projects/00b17016-bb43-45e6-afbb-0368e20c9c6c
+## Overview
 
-## How can I edit this code?
+This is my personal portfolio website showcasing my skills, experience, and projects as a DevOps Engineer. The site features a modern, responsive design with custom animations and a dark mode theme.
 
-There are several ways of editing your application.
+## 🚀 Technologies Used
 
-**Use Lovable**
+- **Framework**: Next.js/React
+- **Styling**: Tailwind CSS with shadcn-ui components
+- **Language**: TypeScript 
+- **Build Tool**: Vite
+- **Animations**: Custom CSS animations and scroll reveal effects
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/00b17016-bb43-45e6-afbb-0368e20c9c6c) and start prompting.
+## ✨ Features
 
-Changes made via Lovable will be committed automatically to this repo.
+- Modern, responsive design with clean UI
+- Dark mode support
+- Interactive elements with hover effects
+- Animated section transitions
+- Typewriter effect for skills display
+- Project showcase with detailed descriptions
+- Certification gallery
+- Contact form
+- Resume download
 
-**Use your preferred IDE**
+## 🛠️ Local Development
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Node.js (v16+)
+- npm or yarn
 
-Follow these steps:
+### Setup and Run
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/rinkush45/Personal-Portfolio.git
+   cd Personal-Portfolio
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-# Step 3: Install the necessary dependencies.
-npm i
+3. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+4. Open your browser and visit `http://localhost:8000`
+
+## 📦 Build and Deployment
+
+1. Build the project:
+   ```bash
+   npm run build
+   # or
+   yarn build
+   ```
+
+2. Preview the production build:
+   ```bash
+   npm run preview
+   # or
+   yarn preview
+   ```
+
+3. Deploy to your hosting provider of choice.
+
+## 📋 Project Structure
+
+```
+.
+├── public/            # Static assets (images, resume)
+├── src/
+│   ├── components/    # React components
+│   │   ├── layout/    # Layout components
+│   │   ├── sections/  # Page sections
+│   │   └── ui/        # UI components
+│   ├── hooks/         # Custom React hooks
+│   ├── lib/           # Utility functions
+│   ├── styles/        # Global CSS
+│   ├── pages/         # Pages
+│   └── types/         # TypeScript type definitions
+└── ...
 ```
 
-**Edit a file directly in GitHub**
+## 🔗 Links
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- [Live Website](https://your-portfolio-url.com)
+- [GitHub Repository](https://github.com/rinkush45/Personal-Portfolio)
+- [LinkedIn](https://linkedin.com/in/rinkush45)
 
-**Use GitHub Codespaces**
+## 📞 Contact
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- Email: sharmarinku@outlook.com
+- Phone: +91 7425949833
+- Location: Jaipur, Rajasthan, India
 
-## What technologies are used for this project?
+## 📄 License
 
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/00b17016-bb43-45e6-afbb-0368e20c9c6c) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+This project is open source and available under the [MIT License](LICENSE).
