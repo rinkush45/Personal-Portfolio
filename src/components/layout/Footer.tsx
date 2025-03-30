@@ -94,11 +94,19 @@ export default function Footer() {
   return (
     <footer 
       ref={footerRef}
-      className="py-10 md:py-16 bg-secondary/30 backdrop-blur-sm border-t border-border w-full overflow-hidden"
+      className="relative py-10 md:py-16 bg-secondary/30 backdrop-blur-sm border-t border-border w-full overflow-hidden grid-bg"
       style={{
         '--stagger-delay': '100ms',
       } as React.CSSProperties}
     >
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-radial from-transparent to-background/80 z-0" />
+      
+      {/* Animated grid background */}
+      <div className="absolute inset-0 z-0">
+        <div className="h-full w-full bg-grid-pattern opacity-30" />
+      </div>
+
       <style>{`
         .footer-visible .animate-footer-fade-up {
           animation: footerFadeUp 0.5s ease forwards;
@@ -143,7 +151,7 @@ export default function Footer() {
         }
       `}</style>
     
-      <div className="content-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="content-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-10">
           {/* Column 1: About */}
           <div className="footer-col">
