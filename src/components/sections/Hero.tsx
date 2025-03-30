@@ -114,7 +114,7 @@ export default function Hero() {
           </a>
           
           <a 
-            href="#" 
+            href="/public/resume/Rinku-Sharma.pdf" 
             download 
             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-neon-orange/50 text-neon-orange font-medium hover:bg-neon-orange/10 transition-all duration-300 hover:translate-y-[-2px] shadow-neon-orange w-full sm:w-auto justify-center"
           >
@@ -124,7 +124,7 @@ export default function Hero() {
         </div>
         
         <div className="mt-8 flex justify-center">
-          <SocialLinks iconSize={24} />
+          <SocialLinks iconSize={30} />
         </div>
         
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
