@@ -1,7 +1,7 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { cn } from '@/lib/utils';
 import { User, Briefcase, Code, GitBranch, Award, ExternalLink } from 'lucide-react';
-import CertificationCard from '../ui/CertificationCard';
+import CertificationCard from '@/components/ui/CertificationCard';
 
 export default function About() {
   const sectionRef = useScrollReveal();
@@ -178,7 +178,7 @@ export default function About() {
                       <h4 className="text-base font-medium text-gray-900 dark:text-white">{cert.title}</h4>
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-sm mt-1">
                         <span className="text-gray-600 dark:text-gray-300">{cert.issuer}</span>
-                        <span className="text-gray-500 dark:text-gray-400 text-sm">{cert.date}</span>
+                        {/* Removed the non-existent 'date' property */}
                       </div>
                       <div className="mt-1.5">
                         <a 
