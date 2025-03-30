@@ -1,9 +1,16 @@
-
-import { useScrollReveal } from '@/hooks/useScrollReveal';
-import AnimatedIcon from '../ui/AnimatedIcon';
+// import { useRef } from 'react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+// import AnimatedIcon from '@/components/ui/AnimatedIcon';
+import aws from "@/images/aws-svgrepo-com.svg"
+import cloudformation from "@/images/aws-cloudformation.svg"
+import https from "@/images/https.svg"
 
 export default function Skills() {
-  const sectionRef = useScrollReveal();
+  const { ref: sectionRef, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true
+  });
   
   const skillCategories = [
     {
@@ -11,7 +18,7 @@ export default function Skills() {
       skills: [
         { 
           name: "AWS", 
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg", 
+          icon: aws,
           color: "orange",
           description: "Amazon Web Services - EC2, ELB, RDS, S3, Lambda, CloudFormation, and more services for cloud computing."
         },
@@ -30,6 +37,29 @@ export default function Skills() {
       ]
     },
     {
+      name: "Version Control",
+      skills: [
+        { 
+          name: "Git", 
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", 
+          color: "orange",
+          description: "Git - Distributed version control system for tracking changes in source code during software development."
+        },
+        { 
+          name: "GitHub", 
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", 
+          color: "violet",
+          description: "GitHub - Web-based hosting service for version control using Git, with collaboration features."
+        },
+        { 
+          name: "GitLab", 
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg", 
+          color: "orange",
+          description: "GitLab - Web-based DevOps lifecycle tool that provides a Git repository manager with CI/CD pipeline features."
+        }
+      ]
+    },
+    {
       name: "Container & Orchestration",
       skills: [
         { 
@@ -43,6 +73,12 @@ export default function Skills() {
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg", 
           color: "cyan",
           description: "Kubernetes - Container orchestration platform for automating deployment, scaling, and management."
+        },
+        { 
+          name: "Istio", 
+          icon: "https://www.vectorlogo.zone/logos/istioio/istioio-icon.svg", 
+          color: "cyan",
+          description: "Istio Service Mesh - Open-source service mesh that provides traffic management, security, and observability for microservices."
         }
       ]
     },
@@ -60,6 +96,12 @@ export default function Skills() {
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ansible/ansible-original.svg", 
           color: "orange",
           description: "Ansible - Automation tool for configuration management, application deployment, and task automation."
+        },
+        { 
+          name: "CloudFormation", 
+          icon: cloudformation, 
+          color: "orange",
+          description: "AWS CloudFormation - Service for modeling and provisioning AWS resources using templates."
         }
       ]
     },
@@ -110,6 +152,52 @@ export default function Skills() {
       ]
     },
     {
+      name: "OS & Networking",
+      skills: [
+        { 
+          name: "Linux", 
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg", 
+          color: "orange",
+          description: "Linux - Open-source operating system, using distributions like Ubuntu and RHEL for server environments."
+        },
+        { 
+          name: "NGINX", 
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg", 
+          color: "cyan",
+          description: "NGINX - Web server, reverse proxy, and load balancer for high-traffic websites."
+        },
+        { 
+          name: "HTTP/HTTPS", 
+          icon: https, 
+          color: "violet",
+          description: "HTTP/HTTPS - Protocols for transmitting hypertext requests between browsers and servers, with HTTPS adding encryption."
+        }
+      ]
+    },
+    {
+      name: "Database",
+      skills: [
+        { 
+          name: "MySQL", 
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", 
+          color: "cyan",
+          description: "MySQL - Open-source relational database management system for storing and retrieving data."
+        },
+        { 
+          name: "MongoDB", 
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", 
+          color: "cyan",
+          description: "MongoDB - NoSQL database program that uses JSON-like documents with optional schemas."
+        },
+        { 
+          name: "PostgreSQL", 
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", 
+          color: "cyan",
+          description: "PostgreSQL - Advanced open-source relational database with SQL compliance and many features."
+        }
+      ]
+    },
+    {
       name: "Programming & Scripting",
       skills: [
         { 
@@ -134,43 +222,126 @@ export default function Skills() {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12
+      }
+    }
+  };
+
   return (
     <section 
       id="skills" 
-      className="py-20 relative overflow-hidden bg-secondary/20 w-full flex items-center justify-center"
+      className="py-16 md:py-24 relative overflow-hidden w-full grid-bg"
     >
-      <div 
-        className="absolute inset-0 bg-grid-pattern opacity-30 z-0"
-      />
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-radial from-transparent to-background/80 z-0" />
       
-      <div className="content-container relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="section-title">Technical Skills</h2>
-        </div>
+      {/* Animated grid background */}
+      <div className="absolute inset-0 z-0">
+        <div className="h-full w-full bg-grid-pattern opacity-30" />
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-12 md:mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+            Technical Skills
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-violet-600 to-pink-600 dark:from-neon-violet dark:to-neon-pink mx-auto rounded-full"></div>
+        </motion.div>
         
-        <div ref={sectionRef} className="space-y-12 w-full max-w-5xl mx-auto">
+        <motion.div 
+          ref={sectionRef}
+          variants={containerVariants}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+        >
           {skillCategories.map((category, categoryIndex) => (
-            <div key={categoryIndex} className="mb-10">
-              <h3 className="text-xl font-semibold mb-6 inline-block relative text-center w-full">
-                {category.name}
-                <span className="absolute bottom-[-5px] left-1/2 transform -translate-x-1/2 w-48 h-0.5 rounded-full bg-gradient-to-r from-neon-violet to-neon-pink"></span>
+            <motion.div 
+              key={categoryIndex}
+              variants={itemVariants}
+              whileHover={{ 
+                y: -5,
+                boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)"
+              }}
+              className="bg-white dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-xl transition-all duration-300"
+            >
+              <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+                <span className="relative">
+                  {category.name}
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-violet-500 to-pink-500 dark:from-neon-violet dark:to-neon-pink rounded-full"></span>
+                </span>
               </h3>
               
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 justify-center">
+              <div className="grid grid-cols-3 gap-4">
                 {category.skills.map((skill, skillIndex) => (
-                  <AnimatedIcon
+                  <motion.div
                     key={skillIndex}
-                    icon={skill.icon}
-                    name={skill.name}
-                    color={skill.color as 'violet' | 'pink' | 'orange' | 'cyan'}
-                    delay={(categoryIndex * 300) + (skillIndex * 100)}
-                    description={skill.description}
-                  />
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ 
+                      delay: 0.2 + (skillIndex * 0.1),
+                      duration: 0.5,
+                      type: "spring"
+                    }}
+                    whileHover={{ scale: 1.1 }}
+                    className="flex flex-col items-center justify-center gap-2"
+                  >
+                    <div className="tooltip-container relative">
+                      {/* Tooltip that appears ABOVE the icon */}
+                      <div className="tooltip absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-52 p-2 
+                                    bg-white dark:bg-gray-800 rounded-md shadow-lg z-50
+                                    text-xs text-gray-700 dark:text-gray-300
+                                    opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                                    transition-all duration-200 pointer-events-none">
+                        {skill.description}
+                        <div className="tooltip-arrow absolute top-full left-1/2 transform -translate-x-1/2 
+                                       border-8 border-transparent border-t-white dark:border-t-gray-800"></div>
+                      </div>
+                      
+                      {/* Icon container */}
+                      <div className="group w-12 h-12 rounded-full flex items-center justify-center 
+                                    bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 
+                                    hover:border-violet-300 dark:hover:border-neon-violet/50 
+                                    transition-all duration-300">
+                        <img 
+                          src={skill.icon} 
+                          alt={skill.name}
+                          className="w-6 h-6 object-contain" 
+                        />
+                      </div>
+                    </div>
+                    <span className="text-xs font-medium text-gray-700 dark:text-gray-300 text-center">
+                      {skill.name}
+                    </span>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

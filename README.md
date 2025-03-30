@@ -1,55 +1,110 @@
-# Welcome to your Lovable project
+# Rinku Sharma - DevOps Engineer Portfolio
 
-## Project info
+![Portfolio Banner](public/resume/banner.png)
 
-## How can I edit this code?
+## Overview
 
-There are several ways of editing your application.
+This is my personal portfolio website showcasing my skills, experience, and projects as a DevOps Engineer. The site features a modern, responsive design with custom animations and a dark mode theme.
 
-**Use your preferred IDE**
+## 🚀 Technologies Used
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- **Framework**: Next.js/React
+- **Styling**: Tailwind CSS with shadcn-ui components
+- **Language**: TypeScript 
+- **Build Tool**: Vite
+- **Animations**: Custom CSS animations and scroll reveal effects
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## ✨ Features
 
-Follow these steps:
+- Modern, responsive design with clean UI
+- Dark mode support
+- Interactive elements with hover effects
+- Animated section transitions
+- Typewriter effect for skills display
+- Project showcase with detailed descriptions
+- Certification gallery
+- Contact form
+- Resume download
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone https://github.com/rinkush45/Personal-Portfolio.git
+## 🛠️ Local Development
 
-# Step 2: Navigate to the project directory.
-cd Personal-Portfolio
+### Prerequisites
 
-# Step 3: Install the necessary dependencies.
-npm i
+- Node.js (v16+)
+- npm or yarn
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+### Setup and Run
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/rinkush45/Personal-Portfolio.git
+   cd Personal-Portfolio
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+4. Open your browser and visit `http://localhost:8000`
+
+## 📦 Build and Deployment
+
+1. Build the project:
+   ```bash
+   npm run build
+   # or
+   yarn build
+   ```
+
+2. Preview the production build:
+   ```bash
+   npm run preview
+   # or
+   yarn preview
+   ```
+
+3. Deploy to your hosting provider of choice.
+
+## 📋 Project Structure
+
+```
+.
+├── public/            # Static assets (images, resume)
+├── src/
+│   ├── components/    # React components
+│   │   ├── layout/    # Layout components
+│   │   ├── sections/  # Page sections
+│   │   └── ui/        # UI components
+│   ├── hooks/         # Custom React hooks
+│   ├── lib/           # Utility functions
+│   ├── styles/        # Global CSS
+│   ├── pages/         # Pages
+│   └── types/         # TypeScript type definitions
+└── ...
 ```
 
-**Edit a file directly in GitHub**
+## 🔗 Links
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- [Live Website](https://your-portfolio-url.com)
+- [GitHub Repository](https://github.com/rinkush45/Personal-Portfolio)
+- [LinkedIn](https://linkedin.com/in/rinkush45)
 
-**Use GitHub Codespaces**
+## 📞 Contact
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- Email: sharmarinku@outlook.com
+- Phone: +91 7425949833
+- Location: Jaipur, Rajasthan, India
 
-## What technologies are used for this project?
+## 📄 License
 
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## Thanks
+This project is open source and available under the [MIT License](LICENSE).

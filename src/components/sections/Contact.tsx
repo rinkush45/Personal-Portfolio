@@ -1,192 +1,302 @@
-
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { Send, Mail, Phone, MapPin } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { toast } from '@/components/ui/use-toast';
+import { supabase } from '@/integrations/supabase/client';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { ContactFormData } from '@/types/contact';
+import { Loader2, Mail, Phone, MapPin, SendIcon } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+
+// Form validation schema using zod
+const formSchema = z.object({
+  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
+  email: z.string().email({ message: 'Please enter a valid email address.' }),
+  message: z.string().min(10, { message: 'Message must be at least 10 characters.' }),
+});
 
 export default function Contact() {
   const sectionRef = useScrollReveal();
-  const { toast } = useToast();
-  
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-  
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-  
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!formData.name || !formData.email || !formData.message) {
-      toast({
-        title: "Error",
-        description: "Please fill in all fields",
-        variant: "destructive"
-      });
-      return;
-    }
-    
+  // Initialize form with react-hook-form and zod validation
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      message: '',
+    },
+  });
+
+  // Submit handler
+  const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // Extract and verify user data
+      const userEmail = data.email;
+      const userName = data.name;
+      const userMessage = data.message;
+      
+      console.log("Submitting form data:", {
+        name: userName,
+        email: userEmail, // Log to verify we have the email
+        message: userMessage
+      });
+      
+      try {
+        // ===== OWNER EMAIL NOTIFICATION =====
+        // User form data goes to owner
+        const ownerNotificationParams = {
+          // User form data to be displayed in email to owner
+          name: userName,
+          email: userEmail,
+          message: `From: ${userName} (${userEmail})
+          
+Message:
+${userMessage}`,
+          
+          // Owner email address (recipient)
+          to_email: 'rinkusharma9833@gmail.com',
+          to_name: 'Rinku Sharma',
+        };
+        
+        console.log("SENDING TO OWNER:", ownerNotificationParams);
+        
+        const ownerEmailResult = await emailjs.send(
+          'service_9cgwmhk', // Your EmailJS service ID
+          'template_r8wx1ib', // Your OWNER notification template ID
+          ownerNotificationParams,
+          'CABC8lcIA4gthzRug' // Your EmailJS public key
+        );
+        console.log("✓ Email sent TO OWNER at rinkusharma9833@gmail.com:", ownerEmailResult);
+        
+        // ===== USER AUTO-REPLY EMAIL =====
+        // This sends a confirmation message back to the user
+        const userAutoReplyParams = {
+          // Just what's needed for auto-reply
+          name: userName,
+          email: 'rinkusharma9833@gmail.com', // Your email as the sender
+          message: `Thank you for contacting me. I'll get back to you soon!`,
+          to_email: userEmail,  // Send to user's email address
+          to_name: userName,
+          reply_to: 'rinkusharma9833@gmail.com', // Set reply-to as your email
+        };
+        
+        console.log("SENDING TO USER:", userAutoReplyParams);
+        console.log("User's email address:", userEmail); // Extra verification
+        
+        const userEmailResult = await emailjs.send(
+          'service_9cgwmhk', // Your EmailJS service ID
+          'template_1n3sy2e', // Your USER auto-reply template ID
+          userAutoReplyParams,
+          'CABC8lcIA4gthzRug' // Your EmailJS public key
+        );
+        console.log("✓ Email sent TO USER at " + userEmail + ":", userEmailResult);
+      } catch (emailError) {
+        console.error("EmailJS error:", emailError);
+        // Continue execution even if email fails
+      }
+      
+      // Then try to save to Supabase
+      try {
+        const { error } = await supabase
+          .from('contact_messages')
+          .insert([data]);
+        
+        if (error) {
+          console.error("Supabase error:", error);
+        }
+      } catch (dbError) {
+        console.error("Supabase error:", dbError);
+        // Continue execution even if database fails
+      }
+      
+      // Show success toast if we got this far
       toast({
-        title: "Message sent!",
-        description: "Thank you for contacting me. I'll get back to you soon.",
+        title: 'Message sent successfully!',
+        description: 'Thank you for reaching out. I will get back to you soon.',
       });
       
-      setFormData({
-        name: '',
-        email: '',
-        message: ''
-      });
+      // Reset form
+      form.reset();
       
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      
+      // Show error toast
+      toast({
+        title: 'Something went wrong',
+        description: 'There was an error sending your message. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
-  };
-  
-  const contactInfo = [
-    {
-      icon: <Mail className="w-5 h-5" />,
-      title: "Email",
-      value: "sharmarinku@outlook.com",
-      link: "mailto:sharmarinku@outlook.com",
-      color: "text-neon-violet"
-    },
-    {
-      icon: <Phone className="w-5 h-5" />,
-      title: "Phone",
-      value: "+91 9876543210",
-      link: "tel:+919876543210",
-      color: "text-neon-pink"
-    },
-    {
-      icon: <MapPin className="w-5 h-5" />,
-      title: "Location",
-      value: "New Delhi, India",
-      link: null,
-      color: "text-neon-orange"
     }
-  ];
+  };
 
   return (
-    <section id="contact" className="py-20 relative overflow-hidden w-full flex items-center justify-center">
-      <div className="content-container">
-        <div className="text-center mb-16">
-          <h2 className="section-title">Get In Touch</h2>
-        </div>
-        
-        <div 
-          ref={sectionRef}
-          className="grid grid-cols-1 lg:grid-cols-5 gap-10"
-        >
-          <div className="lg:col-span-2 flex flex-col justify-between">
+    <section 
+      id="contact" 
+      className="py-20 relative overflow-hidden w-full grid-bg"
+    >
+      {/* Gradient overlay with reduced opacity for more brightness */}
+      <div className="absolute inset-0 bg-gradient-radial from-transparent to-background/60 z-0" />
+      
+      {/* Animated grid background with increased opacity */}
+      <div className="absolute inset-0 z-0">
+        <div className="h-full w-full bg-grid-pattern opacity-40" />
+      </div>
+      
+      {/* Added subtle light effect */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-40 bg-neon-violet/30 blur-[100px] rounded-full z-0"></div>
+      
+      <div className="content-container z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+          {/* Left Column - Contact Info with enhanced contrast */}
+          <div className="flex flex-col justify-center space-y-8">
             <div>
-              <h3 className="text-2xl font-semibold mb-6">Let's Talk</h3>
-              <p className="text-muted-foreground mb-8">
-                Have a project in mind or just want to chat about DevOps and cloud technologies? Feel free to reach out to me through any of these channels or by using the contact form.
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white drop-shadow-sm">Let's Talk</h2>
+              <p className="text-gray-700 dark:text-gray-300 mb-10">
+                Have a project in mind or just want to chat about DevOps 
+                and cloud technologies? Feel free to reach out to me 
+                through any of these channels or by using the contact form.
               </p>
+            </div>
+            
+            <div className="space-y-6">
+              <div className="flex items-center space-x-4 group hover:scale-[1.02] transition-transform">
+                <div className="w-12 h-12 rounded-full bg-violet-100/90 dark:bg-violet-900/20 border-2 border-violet-300 dark:border-neon-violet/60 flex items-center justify-center shadow-md shadow-violet-500/10 dark:shadow-neon-violet/20">
+                  <Mail className="w-5 h-5 text-violet-600 dark:text-neon-violet" />
+                </div>
+                <div>
+                  <div className="text-gray-600 dark:text-gray-300 font-medium">Email</div>
+                  <a href="mailto:sharmarinku@outlook.com" className="text-gray-900 dark:text-white hover:text-violet-600 dark:hover:text-neon-cyan transition-colors font-medium">
+                    sharmarinku@outlook.com
+                  </a>
+                </div>
+              </div>
               
-              <div className="space-y-6">
-                {contactInfo.map((info, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className={`p-3 rounded-full bg-secondary ${info.color}`}>
-                      {info.icon}
-                    </div>
-                    <div>
-                      <h4 className="font-medium">{info.title}</h4>
-                      {info.link ? (
-                        <a 
-                          href={info.link} 
-                          className="text-muted-foreground hover:text-foreground transition-colors duration-300"
-                        >
-                          {info.value}
-                        </a>
-                      ) : (
-                        <p className="text-muted-foreground">{info.value}</p>
-                      )}
-                    </div>
-                  </div>
-                ))}
+              <div className="flex items-center space-x-4 group hover:scale-[1.02] transition-transform">
+                <div className="w-12 h-12 rounded-full bg-pink-100/90 dark:bg-pink-900/20 border-2 border-pink-300 dark:border-neon-pink/60 flex items-center justify-center shadow-md shadow-pink-500/10 dark:shadow-neon-pink/20">
+                  <Phone className="w-5 h-5 text-pink-600 dark:text-neon-pink" />
+                </div>
+                <div>
+                  <div className="text-gray-600 dark:text-gray-300 font-medium">Phone</div>
+                  <a href="tel:+917425949833" className="text-gray-900 dark:text-white hover:text-violet-600 dark:hover:text-neon-cyan transition-colors font-medium">
+                    +91 7425949833
+                  </a>
+                </div>
+              </div>
+              
+              <div className="flex items-center space-x-4 group hover:scale-[1.02] transition-transform">
+                <div className="w-12 h-12 rounded-full bg-orange-100/90 dark:bg-orange-900/20 border-2 border-orange-300 dark:border-neon-orange/60 flex items-center justify-center shadow-md shadow-orange-500/10 dark:shadow-neon-orange/20">
+                  <MapPin className="w-5 h-5 text-orange-600 dark:text-neon-orange" />
+                </div>
+                <div>
+                  <div className="text-gray-600 dark:text-gray-300 font-medium">Location</div>
+                  <div className="text-gray-900 dark:text-white font-medium">Jaipur, Rajasthan, India</div>
+                </div>
               </div>
             </div>
           </div>
           
-          <div className="lg:col-span-3">
-            <div className="glass-card glass-card-dark rounded-lg p-8 border border-neon-orange/30 shadow-neon-orange">
-              <h3 className="text-2xl font-semibold mb-6">Send Me a Message</h3>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium mb-1">
-                        Name
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border focus:border-neon-orange/50 focus:shadow-neon-orange focus:outline-none transition-all duration-300"
-                        placeholder="Your name"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-1">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border focus:border-neon-orange/50 focus:shadow-neon-orange focus:outline-none transition-all duration-300"
-                        placeholder="Your email"
-                      />
-                    </div>
-                  </div>
+          {/* Right Column - Contact Form */}
+          <div 
+            ref={sectionRef} 
+            className="bg-white dark:bg-transparent rounded-xl border border-gray-200 dark:border-gray-800 shadow-md dark:shadow-none p-8 dark:glass-card dark:glass-card-dark"
+          >
+            <h3 className="text-2xl font-bold mb-8 text-gray-900 dark:text-white">Send Me a Message</h3>
+            
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-gray-700 dark:text-gray-300">Name</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="Your name" 
+                            {...field} 
+                            className="bg-gray-50 dark:bg-gray-900/70 border-gray-200 dark:border-gray-800 focus:border-violet-400 dark:focus:border-violet-400" 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                   
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-1">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows={5}
-                      className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border focus:border-neon-orange/50 focus:shadow-neon-orange focus:outline-none transition-all duration-300"
-                      placeholder="Your message"
-                    />
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-gray-700 dark:text-gray-300">Email</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="Your email" 
+                            {...field} 
+                            className="bg-gray-50 dark:bg-gray-900/70 border-gray-200 dark:border-gray-800 focus:border-violet-400 dark:focus:border-violet-400" 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
                 
-                <button
-                  type="submit"
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-gray-700 dark:text-gray-300">Message</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Your message" 
+                          className="min-h-[150px] bg-gray-50 dark:bg-gray-900/70 border-gray-200 dark:border-gray-800 focus:border-violet-400 dark:focus:border-violet-400" 
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <Button 
+                  type="submit" 
+                  className="w-full py-6 bg-gradient-to-r from-violet-600 to-pink-600 dark:from-neon-orange dark:to-neon-pink hover:opacity-90 text-white font-medium"
                   disabled={isSubmitting}
-                  className="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-neon-orange to-neon-pink text-white font-medium hover:opacity-90 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-neon-orange/20"
                 >
                   {isSubmitting ? (
-                    "Sending..."
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
                   ) : (
                     <>
-                      Send Message <Send className="w-4 h-4" />
+                      Send Message <SendIcon className="ml-2 h-4 w-4" />
                     </>
                   )}
-                </button>
+                </Button>
               </form>
-            </div>
+            </Form>
           </div>
         </div>
       </div>

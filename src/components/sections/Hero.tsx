@@ -1,14 +1,16 @@
-
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowDown, Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
+import aws from "@/images/aws-svgrepo-com.svg"
+import Typewriter from 'typewriter-effect';
+import SocialLinks from "@/components/sections/SocialLinks";
 
 // Tech icons
 const techIcons = [
   { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg', delay: 300, top: '15%', left: '80%', size: 'w-10 h-10' },
   { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg', delay: 500, top: '75%', left: '85%', size: 'w-8 h-8' },
-  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg', delay: 700, top: '25%', left: '10%', size: 'w-12 h-12' },
+  { src: aws, delay: 700, top: '25%', left: '10%', size: 'w-12 h-12' },
   { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg', delay: 900, top: '70%', left: '15%', size: 'w-9 h-9' },
   { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', delay: 1100, top: '10%', left: '40%', size: 'w-8 h-8' },
   { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg', delay: 1300, top: '80%', left: '40%', size: 'w-10 h-10' },
@@ -18,6 +20,7 @@ export default function Hero() {
   // Refs for animated elements
   const techIconsRef = useRef<(HTMLDivElement | null)[]>([]);
   const isMobile = useIsMobile();
+  const [techClass, setTechClass] = useState("neon-glow-text-violet");
   
   useEffect(() => {
     // Animate tech icons into view with delays
@@ -69,9 +72,26 @@ export default function Hero() {
       ))}
       
       <div className="content-container z-10 px-4 sm:px-6 md:px-8 text-center max-w-4xl">
-        <div className="mb-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/50 backdrop-blur-sm text-sm border border-border/50">
+        <div className="mb-3 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 backdrop-blur-sm text-sm border border-border/50 min-h-[40px] min-w-[220px]">
           <div className="w-2 h-2 rounded-full bg-neon-pink animate-pulse-glow"></div>
-          <span>DevOps Engineer</span>
+          <div className="typewriter-container">
+            <Typewriter
+              options={{
+                strings: [
+                  "DevOps Engineer",
+                  "Cloud & Automation Enthusiast",
+                  "AWS | Kubernetes | Terraform Specialist",
+                  "CI/CD Pipeline Expert"
+                ],
+                autoStart: true,
+                loop: true,
+                delay: 75,
+                deleteSpeed: 50,
+                wrapperClassName: "typewriter-wrapper",
+                cursorClassName: "typewriter-cursor",
+              }}
+            />
+          </div>
         </div>
         
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-neon-violet via-neon-pink to-neon-orange">
@@ -80,10 +100,48 @@ export default function Hero() {
         
         <h2 className="text-xl md:text-2xl max-w-3xl mx-auto mb-8 leading-relaxed text-foreground/80">
           Cloud & Automation Enthusiast with expertise in 
-          <span className="neon-glow-text-violet font-semibold"> AWS</span>,
-          <span className="neon-glow-text-cyan font-semibold"> Kubernetes</span>,
-          <span className="neon-glow-text-pink font-semibold"> Terraform</span> & 
-          <span className="neon-glow-text-orange font-semibold"> CI/CD</span>
+          <span className="font-semibold">
+            <Typewriter
+              onInit={(typewriter) => {
+                typewriter
+                  .typeString('<span class="neon-glow-text-violet"> AWS</span>')
+                  .pauseFor(1000)
+                  .deleteAll()
+                  .typeString('<span class="neon-glow-text-orange"> GCP</span>')
+                  .pauseFor(1000)
+                  .deleteAll()
+                  .typeString('<span class="neon-glow-text-orange"> Azure</span>')
+                  .pauseFor(1000)
+                  .deleteAll()
+                  .typeString('<span class="neon-glow-text-orange"> Infrastructure as Code and Automation</span>')
+                  .pauseFor(1000)
+                  .deleteAll()
+                  .typeString('<span class="neon-glow-text-orange"> CI/CD</span>')
+                  .pauseFor(1000)
+                  .deleteAll()
+                  .typeString('<span class="neon-glow-text-cyan"> Containerization and Orchestration</span>')
+                  .pauseFor(1000)
+                  .deleteAll()
+                  .typeString('<span class="neon-glow-text-pink"> Monitoring and Observability</span>')
+                  .pauseFor(1000)
+                  .deleteAll()
+                  .typeString('<span class="neon-glow-text-orange"> OS and Networking</span>')
+                  .pauseFor(1000)
+                  .deleteAll()
+                  .start();
+              }}
+              options={{
+                autoStart: true,
+                loop: true,
+                delay: 80,
+                deleteSpeed: 40,
+                cursor: '|',
+                wrapperClassName: "inline",
+                cursorClassName: "text-neon-pink",
+                skipAddStyles: true,
+              }}
+            />
+          </span>
         </h2>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
@@ -95,13 +153,17 @@ export default function Hero() {
           </a>
           
           <a 
-            href="#" 
+            href="/publi/resume/Rinku-Sharma.pdf" 
             download 
             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-neon-orange/50 text-neon-orange font-medium hover:bg-neon-orange/10 transition-all duration-300 hover:translate-y-[-2px] shadow-neon-orange w-full sm:w-auto justify-center"
           >
             <Download className="w-4 h-4" /> 
             Download Resume
           </a>
+        </div>
+        
+        <div className="mt-8 flex justify-center">
+          <SocialLinks iconSize={30} />
         </div>
         
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
