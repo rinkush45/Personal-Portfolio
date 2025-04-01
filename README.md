@@ -1,11 +1,9 @@
 # Rinku Sharma - DevOps Engineer Portfolio
 
-<!-- Video Banner -->
+<!-- Banner Image -->
 <div align="center">
-  <video width="100%" autoplay loop muted playsinline>
-    <source src="public/resume/demo.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+  
+  <p><a href="https://github.com/rinkush45/Personal-Portfolio/blob/main/public/resume/demo.mp4?raw=true">▶️ Watch Demo Video</a></p>
 </div>
 
 ## Overview
