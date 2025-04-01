@@ -2,6 +2,7 @@
 
 <!-- Banner Image -->
 <div align="center">
+  <img src="public/resume/banner.png" alt="Portfolio Banner" width="100%">
   
   <p><a href="https://github.com/rinkush45/Personal-Portfolio/blob/main/public/resume/demo.mp4?raw=true">▶️ Watch Demo Video</a></p>
 </div>
