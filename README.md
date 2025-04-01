@@ -1,6 +1,12 @@
 # Rinku Sharma - DevOps Engineer Portfolio
 
-![Portfolio Banner](public/resume/banner.png)
+<!-- Video Banner -->
+<div align="center">
+  <video width="100%" autoplay loop muted playsinline>
+    <source src="public/resume/demo.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
 
 ## Overview
 
