@@ -153,7 +153,7 @@ export default function Hero() {
           </a>
           
           <a 
-            href=public/resume/Rinku-sharma.pdf
+            href='public/resume/Rinku-sharma.pdf'
             download 
             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-neon-orange/50 text-neon-orange font-medium hover:bg-neon-orange/10 transition-all duration-300 hover:translate-y-[-2px] shadow-neon-orange w-full sm:w-auto justify-center"
           >
