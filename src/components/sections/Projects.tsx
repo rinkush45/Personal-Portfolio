@@ -1,6 +1,7 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { cn } from '@/lib/utils';
-import { ExternalLink, Github, ArrowRight } from 'lucide-react';
+import { ExternalLink, Github, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import hotstar from "@/images/hotstart.jpeg"
 
 interface Project {
@@ -15,6 +16,9 @@ interface Project {
 
 export default function Projects() {
   const sectionRef = useScrollReveal();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [animationDirection, setAnimationDirection] = useState('right');
+  const [isAnimating, setIsAnimating] = useState(false);
   
   const projects: Project[] = [
     {
@@ -33,7 +37,7 @@ export default function Projects() {
     {
       title: "FreeDevs: [Freelancer Website]",
       description: [
-        "Deployed and managed the platform’s backend using AWS EC2, RDS, and S3.",
+        "Deployed and managed the platform's backend using AWS EC2, RDS, and S3.",
         "Implemented CI/CD pipelines for automated deployment and updates.",
         "Ensured high availability with load balancing and auto-scaling.",
         "Monitored infrastructure performance using Prometheus & Grafana."
@@ -47,17 +51,54 @@ export default function Projects() {
     {
       title: "Hotstar: [Hotstar Clone Deployment]",
       description: [
-          "Integrated CI/CD pipelines for automated deployment and testing.",
-          "Deployed application infrastructure using AWS & Terraform.",
-          "Conducted thorough testing post-deployment to ensure seamless user experience"
-        ],
-        image: hotstar,
-        tags: ["Terraform", "AWS", "Microservices", "Docker", "CI/CD"],
-        githubUrl: "https://github.com/rinkush45/hotstar-clone",
-        liveUrl: "https://app-hotstar.netlify.app/",
+        "Integrated CI/CD pipelines for automated deployment and testing.",
+        "Deployed application infrastructure using AWS & Terraform.",
+        "Conducted thorough testing post-deployment to ensure seamless user experience"
+      ],
+      image: hotstar,
+      tags: ["Terraform", "AWS", "Microservices", "Docker", "CI/CD"],
+      githubUrl: "https://github.com/rinkush45/hotstar-clone",
+      liveUrl: "https://app-hotstar.netlify.app/",
       featured: true
     }
   ];
+
+  // Auto-rotate projects every 7 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (!isAnimating) {
+        goToNext();
+      }
+    }, 7000);
+    
+    return () => clearInterval(timer);
+  }, [currentIndex, isAnimating]);
+
+  const goToPrev = () => {
+    if (isAnimating) return;
+    
+    setIsAnimating(true);
+    setAnimationDirection('left');
+    
+    setCurrentIndex(prev => 
+      prev === 0 ? projects.length - 1 : prev - 1
+    );
+    
+    setTimeout(() => setIsAnimating(false), 500);
+  };
+
+  const goToNext = () => {
+    if (isAnimating) return;
+    
+    setIsAnimating(true);
+    setAnimationDirection('right');
+    
+    setCurrentIndex(prev => 
+      prev === projects.length - 1 ? 0 : prev + 1
+    );
+    
+    setTimeout(() => setIsAnimating(false), 500);
+  };
 
   return (
     <section 
@@ -77,14 +118,55 @@ export default function Projects() {
           <h2 className="section-title">Things I've Worked on, Some of Them</h2>
         </div>
         
-        <div ref={sectionRef} className="space-y-32">
-          {projects.map((project, index) => (
-            <ProjectCard 
-              key={index}
-              project={project} 
-              index={index}
-            />
-          ))}
+        <div ref={sectionRef} className="relative min-h-[30rem]">
+          {/* Linked List Visualization */}
+          <div className="absolute top-0 left-0 right-0 flex justify-center items-center gap-2 mb-8">
+            {projects.map((_, idx) => (
+              <div key={idx} className="flex items-center">
+                <div 
+                  className={cn(
+                    "w-3 h-3 rounded-full transition-colors duration-300",
+                    currentIndex === idx ? "bg-neon-pink" : "bg-neon-pink/30"
+                  )}
+                />
+                {idx < projects.length - 1 && (
+                  <div className="w-8 h-0.5 bg-neon-pink/30" />
+                )}
+              </div>
+            ))}
+          </div>
+          
+          {/* Project Display */}
+          <div className="relative mt-10 overflow-hidden">
+            <div
+              className={cn(
+                "transition-all duration-500 ease-in-out",
+                isAnimating && animationDirection === 'right' ? "opacity-0 translate-x-[100px]" : "",
+                isAnimating && animationDirection === 'left' ? "opacity-0 -translate-x-[100px]" : "",
+              )}
+            >
+              <ProjectCard project={projects[currentIndex]} index={currentIndex} />
+            </div>
+            
+            {/* Navigation Buttons */}
+            <div className="flex justify-between absolute top-1/2 left-0 right-0 -mt-6 px-4">
+              <button 
+                onClick={goToPrev}
+                className="w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm border border-neon-violet/30 flex items-center justify-center text-white shadow-lg shadow-neon-violet/20 hover:bg-neon-violet/20 transition-all duration-300"
+                aria-label="Previous project"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              
+              <button 
+                onClick={goToNext}
+                className="w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm border border-neon-pink/30 flex items-center justify-center text-white shadow-lg shadow-neon-pink/20 hover:bg-neon-pink/20 transition-all duration-300"
+                aria-label="Next project"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -99,13 +181,32 @@ interface ProjectCardProps {
 function ProjectCard({ project, index }: ProjectCardProps) {
   const isEven = index % 2 === 0;
   
+  const handleProjectClick = () => {
+    // Clean up the slug 
+    const slug = project.title
+      .toLowerCase()
+      .replace(/[\[\]:]/g, '')  // Remove brackets and colons
+      .replace(/\s+/g, '-')     // Replace spaces with hyphens
+      .trim();                  // Remove any extra whitespace
+      
+    // Create query params with the project data
+    const queryParams = new URLSearchParams();
+    queryParams.set('data', JSON.stringify(project));
+    queryParams.set('index', index.toString());
+    
+    // Navigate to the project detail page
+    window.location.href = `/project/${slug}?${queryParams.toString()}`;
+  };
+  
   return (
-    <div className={cn(
-      "relative flex flex-col md:flex-row items-center",
-      "opacity-0 animate-slide-up",
-      isEven ? "md:flex-row" : "md:flex-row-reverse"
-    )}
-    style={{ animationDelay: `${index * 200}ms` }}>
+    <div 
+      className={cn(
+        "relative flex flex-col md:flex-row items-center cursor-pointer",
+        "animate-fade-in hover:scale-[1.01] transition-transform duration-300",
+        isEven ? "md:flex-row" : "md:flex-row-reverse"
+      )}
+      onClick={handleProjectClick}
+    >
       {/* Project Image Side */}
       <div className="w-full md:w-1/2 relative">
         <div className={cn(
